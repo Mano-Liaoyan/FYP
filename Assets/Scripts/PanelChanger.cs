@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class SceneChanger  : MonoBehaviour
+public class PanelChanger : MonoBehaviour
 {
-    public void ChangeScene(string sceneName)
+    public GameObject panel;
+    public GameObject mainPage;
+    public void ChangePanel()
     {
-        SceneManager.LoadScene(sceneName);
+        panel.SetActive(true);
+        mainPage.SetActive(false);
     }
     
     public void Exit()
