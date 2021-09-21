@@ -73,10 +73,10 @@ public class MonsterAnimationManager : MonoBehaviour
             _xPrev = _xAxis == 0 ? _xPrev : _xAxis;
         }
 
+            // _animator.Play(ATTACK);
         // Test Attacking
         if (Input.GetMouseButtonUp(0))
         {
-            // _animator.Play(ATTACK);
             _animator.SetTrigger("LeftMouseClick");
         }
 
