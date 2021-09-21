@@ -10,15 +10,8 @@ using UnityEngine.Serialization;
 public class MonsterAnimationManager : MonoBehaviour
 {
     public float moveSpeed = 100.0f;
-    public GameObject face;
-    public GameObject mouth;
-
-    public Sprite[] faces;
-    public Sprite[] mouths;
 
     private Animator _animator;
-    private SpriteRenderer _faceRenderer;
-    private SpriteRenderer _mouthRenderer;
 
     private float _xAxis;
     private float _yAxis;
@@ -36,8 +29,6 @@ public class MonsterAnimationManager : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
-        _faceRenderer = face.GetComponent<SpriteRenderer>();
-        _mouthRenderer = mouth.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -49,11 +40,6 @@ public class MonsterAnimationManager : MonoBehaviour
 
     private void TestAnimation()
     {
-        if (_animator.GetBool("IsIdle"))
-        {
-            _faceRenderer.sprite = faces[0];
-            _mouthRenderer.sprite = mouths[0];
-        }
 
         _xAxis = Input.GetAxis("Horizontal");
         _yAxis = Input.GetAxis("Vertical");
@@ -84,16 +70,12 @@ public class MonsterAnimationManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.V))
         {
             _animator.Play(HURT);
-            _faceRenderer.sprite = faces[1];
-            _mouthRenderer.sprite = mouths[1];
         }
 
         // Test Smoke
         if (Input.GetKeyUp(KeyCode.Space))
         {
             _animator.Play(SMOKE);
-            _faceRenderer.sprite = faces[2];
-            _mouthRenderer.sprite = mouths[1];
         }
     }
 }
