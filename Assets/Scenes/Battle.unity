@@ -1501,7 +1501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212139710760871528, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: -8
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 212139710760871528, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
@@ -1513,7 +1513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212278617872220762, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: -10
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 212278617872220762, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
@@ -1525,7 +1525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212310489902715876, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 212310489902715876, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
@@ -1541,7 +1541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212369353663052842, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: -3
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 212369353663052842, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
@@ -1553,7 +1553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212477042036189820, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: -6
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 212477042036189820, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
@@ -1565,7 +1565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212599488207832510, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: -4
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 212599488207832510, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
@@ -1577,7 +1577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212646668965138694, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 212646668965138694, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
@@ -1589,7 +1589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212842437238135038, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: -5
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 212842437238135038, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
@@ -1601,7 +1601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212903037361131714, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: -9
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 212903037361131714, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
@@ -1613,7 +1613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212915014836095932, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: -7
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 212915014836095932, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
@@ -1625,11 +1625,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212994015582399540, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingOrder
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 212994015582399540, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
       propertyPath: m_SortingLayerID
       value: -1419257677
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913841358656988795, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913841358656988795, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b87cd4612765874db76e12ae8815994, type: 3}
@@ -11847,6 +11855,22 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6290436203591938676, guid: 7086e685ceb361f499307920bc125c21, type: 3}
+      propertyPath: Sprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290436203591938676, guid: 7086e685ceb361f499307920bc125c21, type: 3}
+      propertyPath: Sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4b2120d7af651734bbcb5ba278fa66b9, type: 3}
+    - target: {fileID: 6290436203591938676, guid: 7086e685ceb361f499307920bc125c21, type: 3}
+      propertyPath: Sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 322c06659e3ab354f90f8852e674d43c, type: 3}
+    - target: {fileID: 6290436203591938676, guid: 7086e685ceb361f499307920bc125c21, type: 3}
+      propertyPath: Sprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 09bf2402d537e554595bff055e2b7525, type: 3}
     - target: {fileID: 7222504274544507702, guid: 7086e685ceb361f499307920bc125c21, type: 3}
       propertyPath: Sprites.Array.size
       value: 3
