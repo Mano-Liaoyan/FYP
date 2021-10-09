@@ -20,7 +20,12 @@ public class SceneLoader : MonoBehaviour
         
     }
 
-    public void LoadScene()
+    public static void LoadScene(string scene_name)
+    {
+        SceneManager.LoadScene(scene_name);
+    }
+
+    public void LoadSceneByName()
     {
         SceneManager.LoadScene(sceneName);
     }

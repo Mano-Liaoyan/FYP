@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8d1e7e01c5e284aad368232c07d3b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SceneLoader: {fileID: 0}
   WarningMessage: {fileID: 1040394331}
   PopupWindow: {fileID: 855299386142171768}
 --- !u!1 &1000134889
@@ -2770,7 +2771,6 @@ GameObject:
   - component: {fileID: 5294214586222006910}
   - component: {fileID: 5294214586222006911}
   - component: {fileID: 923506223}
-  - component: {fileID: 5294214586222006898}
   m_Layer: 5
   m_Name: Button_Blue
   m_TagString: Untagged
@@ -2778,19 +2778,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5294214586222006898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5294214586222006897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71eaff3297b5cc645bfed326bfa07137, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Game View
 --- !u!222 &5294214586222006909
 CanvasRenderer:
   m_ObjectHideFlags: 0

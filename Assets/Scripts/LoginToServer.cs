@@ -17,6 +17,7 @@ public class LoginToServer : MonoBehaviour
     private readonly IClient _client = new Client(Scheme, Host, Port, ServerKey);
 
     private ISession _session;
+    public SceneLoader SceneLoader;
     [SerializeField] private GameObject WarningMessage;
     [SerializeField] private GameObject PopupWindow;
 
@@ -50,6 +51,7 @@ public class LoginToServer : MonoBehaviour
             var session = await _client.AuthenticateEmailAsync(username, pwd);
             Debug.Log($"New user: {session.Created}, {session}");
             // If success, switch scene to game view
+            SceneLoader.LoadScene("Game View");
         }
         catch (ApiResponseException e)
         { // Pop up a modal that infos user the current error
