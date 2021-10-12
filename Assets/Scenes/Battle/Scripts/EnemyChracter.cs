@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FriendlyChracter : MonoBehaviour
+public class EnemyChracter : MonoBehaviour
 {
-    private GameObject Character_Friendly;
+    private GameObject Character_Enemy;
     private RectTransform parentRectTransform;
     private Vector2 parentSize;
     private int characterLength;
@@ -12,6 +12,7 @@ public class FriendlyChracter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -22,19 +23,17 @@ public class FriendlyChracter : MonoBehaviour
 
     void ReceiveCharactersMessage(List<string> Characters)
     {
-        Character_Friendly = GameObject.Find("Character_Friendly");
-        parentRectTransform = Character_Friendly.GetComponent<RectTransform>();
+        Character_Enemy = GameObject.Find("Character_Enemy");
+        parentRectTransform = Character_Enemy.GetComponent<RectTransform>();
         parentSize = parentRectTransform.rect.size;
         characterLength = Characters.Count;
-        foreach (string character in Characters)        {
-            
+        foreach (string character in Characters)
+        {
             GameObject NewCharacter = (GameObject)Instantiate(Resources.Load($"Prefab/{character}"), transform.position, Quaternion.identity);
-            // Set worldPostionStays to false
-            // See https://blog.csdn.net/qq_42672770/article/details/109180796
-            NewCharacter.transform.SetParent(Character_Friendly.transform, false);
+            NewCharacter.transform.SetParent(Character_Enemy.transform, false);
             int index = Characters.IndexOf(character);
             CalcPostion(NewCharacter, index);
-        }
+        }        
     }
 
     void CalcPostion(GameObject obj, int index)
@@ -60,5 +59,6 @@ public class FriendlyChracter : MonoBehaviour
         //float y = ((float)(index + 1) / (float)characters.Count) * parentSize.y;
         //print($"x = {x},y = {y}");
         obj.transform.localPosition = new Vector3(0, intervel * (y * 0.4f) - 80, 0);
+        obj.transform.localRotation = new Quaternion(0, 180, 0, 0);
     }
 }
