@@ -16,7 +16,6 @@ public class LoginToServer : MonoBehaviour
 
     private readonly IClient _client = new Client(Scheme, Host, Port, ServerKey);
 
-    private ISession _session;
     public SceneLoader SceneLoader;
     [SerializeField] private GameObject WarningMessage;
     [SerializeField] private GameObject PopupWindow;
@@ -48,8 +47,8 @@ public class LoginToServer : MonoBehaviour
     {
         try
         {
-            var session = await _client.AuthenticateEmailAsync(username, pwd);
-            Debug.Log($"New user: {session.Created}, {session}");
+            User.session = await _client.AuthenticateEmailAsync(username, pwd);
+            Debug.Log($"New user: {User.session.Created}, {User.session}");
             // If success, switch scene to game view
             SceneLoader.LoadScene("Game View");
         }
