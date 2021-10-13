@@ -8,11 +8,13 @@ using UnityEngine.UI;
 public class CharacterSlotInfos : MonoBehaviour
 {
     [SerializeField] private string Character;
+    [SerializeField] private int CharacterIdx;
     [SerializeField, Min(1)] private int Level;
     [SerializeField, Range(0, 1)] private float Health;
     [SerializeField, Range(0, 1)] private float Mana;
 
     public string SetCharacter { set { Character = value; UpdateMasks(); } }
+    public int SetCharacterIdx { set { CharacterIdx = value; } }
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,13 @@ public class CharacterSlotInfos : MonoBehaviour
 
     void UpdateMasks()
     {
-        transform.Find("Mask/Character").GetComponent<Image>().sprite = Instantiate(Resources.Load($"Masks/{Character}", typeof(Sprite))) as Sprite;
+        transform.Find("Mask/Character").GetComponent<Image>().sprite =
+            Instantiate(Resources.Load($"Masks/{Character}", typeof(Sprite))) as Sprite;
+    }
+
+    public void OnclickAttack()
+    {
+        BattleDataManager.OnAttackClick(CharacterIdx);
+        this.GetComponent<Moving>().enabled = true;
     }
 }

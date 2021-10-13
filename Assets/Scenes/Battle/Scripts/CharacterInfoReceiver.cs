@@ -35,7 +35,9 @@ public class CharacterInfoReceiver : MonoBehaviour
             temp.z = 0;
             NewSlot.transform.localPosition = temp;
             NewSlot.GetComponent<CharacterSlotInfos>().SetCharacter = character;
+            
             int index = Characters.IndexOf(character);
+            NewSlot.GetComponent<CharacterSlotInfos>().SetCharacterIdx = index;
         }
     }
 }

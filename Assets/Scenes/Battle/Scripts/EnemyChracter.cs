@@ -58,7 +58,8 @@ public class EnemyChracter : MonoBehaviour
         }
         //float y = ((float)(index + 1) / (float)characters.Count) * parentSize.y;
         //print($"x = {x},y = {y}");
-        obj.transform.localPosition = new Vector3(0, intervel * (y * 0.4f) - 80, 0);
+        obj.transform.localPosition = new Vector3(x, intervel * (y * 0.4f) - 80, 0);
         obj.transform.localRotation = new Quaternion(0, 180, 0, 0);
+        BattleDataManager.EnemyCharactersPostions.Insert(index, obj.transform.localPosition);
     }
 }

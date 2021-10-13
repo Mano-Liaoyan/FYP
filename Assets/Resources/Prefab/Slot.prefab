@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3170991466120412675}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9119366061923957628}
+        m_TargetAssemblyTypeName: CharacterSlotInfos, Assembly-CSharp
+        m_MethodName: OnclickAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5861211548112891936
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +704,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 61
+  m_text: 67
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a2157e1f9c4c4d38841fbb92558f587, type: 2}
   m_sharedMaterial: {fileID: -6360588970910393389, guid: 9a2157e1f9c4c4d38841fbb92558f587, type: 2}
@@ -960,7 +972,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.19968951
+  m_Value: 0.09074867
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1667,7 +1679,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.38358778
+  m_Value: 0.012072682
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1759,6 +1771,7 @@ GameObject:
   - component: {fileID: 9119366061923957630}
   - component: {fileID: 9119366061923957628}
   - component: {fileID: 1219830795}
+  - component: {fileID: 2104081556}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -1841,9 +1854,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Character: 
-  Level: 61
-  Health: 0.38358778
-  Mana: 0.19968951
+  CharacterIdx: 0
+  Level: 67
+  Health: 0.012072682
+  Mana: 0.09074867
 --- !u!114 &1219830795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1900,6 +1914,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &2104081556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9119366061923957624}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d79927dbcc9604bb52b3f3b77c8a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartPoint: {x: 0, y: 0, z: 0}
+  EndPoint: {x: 0, y: 0, z: 0}
+  speed: 5
 --- !u!1 &9119366061954410186
 GameObject:
   m_ObjectHideFlags: 0
