@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FriendlyChracter : MonoBehaviour
 {
+    private bool isFinishLoad = false;
     private GameObject Character_Friendly;
     private RectTransform parentRectTransform;
     private Vector2 parentSize;
@@ -36,9 +37,14 @@ public class FriendlyChracter : MonoBehaviour
             // See https://blog.csdn.net/qq_42672770/article/details/109180796
             NewCharacter.transform.SetParent(Character_Friendly.transform, false);
             int index = Characters.IndexOf(character);
-            BattleDataManager.FriendlyCharacters.Insert(index, character);
+            BattleDataManager.FriendlyCharactersName.Insert(index, character);
             CalcPostion(NewCharacter, index);
         }
+    }
+
+    public bool isFinsish()
+    {
+        return isFinishLoad;
     }
 
     void CalcPostion(GameObject obj, int index)
@@ -65,6 +71,9 @@ public class FriendlyChracter : MonoBehaviour
         //print($"x = {x},y = {y}");
         obj.transform.localPosition = new Vector3(-x, intervel * (y * 0.4f) - 80, 0);
         BattleDataManager.FriendlyCharactersPostions.Insert(index, obj.transform.localPosition);
+        isFinishLoad = true;
+        print("load finish");
+        GameObject.Find("GameManager").SendMessage("findAllCharacter");
     }
 
     void RecieveSkills(object[] message)

@@ -257,7 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4816971756265696}
   - component: {fileID: 212565717443556418}
-  - component: {fileID: 7367329197041080782}
+  - component: {fileID: 5241973417985602126}
   m_Layer: 0
   m_Name: Eyes 01
   m_TagString: Untagged
@@ -330,7 +330,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7367329197041080782
+--- !u!114 &5241973417985602126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
