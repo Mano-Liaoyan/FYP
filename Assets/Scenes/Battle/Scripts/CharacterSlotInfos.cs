@@ -42,7 +42,7 @@ public class CharacterSlotInfos : MonoBehaviour
     {
         print("onclickAttack()");
         BattleLogicManager.updateMovement(Character, Random.Range(0, BattleDataManager.EnemyCharactersPostions.Count));
-        
+        EventCenter.Instance.TriggerEventListener("Attack");
         //BattleLogicManager.updateMovement(Character);
         //BattleDataManager.OnAttackClick(CharacterIdx);
         //this.GetComponent<Moving>().enabled = true;

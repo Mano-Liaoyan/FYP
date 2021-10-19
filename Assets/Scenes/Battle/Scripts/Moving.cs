@@ -22,7 +22,6 @@ public class Moving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print($"{obj.position}");
         obj.position = Vector3.MoveTowards(obj.position, EndPoint, speed * Time.deltaTime);
         if (Vector3.Distance(obj.position, EndPoint) < 0.001f)
         {

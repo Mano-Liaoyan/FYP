@@ -25,6 +25,7 @@ public class BattleDataManager : MonoBehaviour
         EnemyCharactersPostions = new List<Vector3>();
         FriendlyCharactersName = new List<string>();
         isAnimating = false;
+        EventCenter.Instance.AddEventListener("Attack", printAttack);
     }
 
     public void findAllCharacter()
@@ -60,5 +61,10 @@ public class BattleDataManager : MonoBehaviour
         //isAnimating = true;
         //GameObject.Find("Character_Friendly").SendMessage("RecieveSkills", message);
 
+    }
+
+    public void printAttack()
+    {
+        print("Ataaaaaaaaaaakkkkkkkkkk");
     }
 }
