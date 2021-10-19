@@ -11,6 +11,7 @@ public class BattleDataManager : MonoBehaviour
     public static List<Vector3> EnemyCharactersPostions;
 
     public static int currentIndex;
+    public static int targetIndex;
     public static bool isAnimating;
 
     public static object[] message = new object[2];
@@ -25,7 +26,6 @@ public class BattleDataManager : MonoBehaviour
         EnemyCharactersPostions = new List<Vector3>();
         FriendlyCharactersName = new List<string>();
         isAnimating = false;
-        EventCenter.Instance.AddEventListener("Attack", printAttack);
     }
 
     public void findAllCharacter()
@@ -57,14 +57,7 @@ public class BattleDataManager : MonoBehaviour
 
     public static void OnAttackClick(int TargetID)
     {        
-        currentIndex = TargetID;
-        //isAnimating = true;
-        //GameObject.Find("Character_Friendly").SendMessage("RecieveSkills", message);
 
     }
 
-    public void printAttack()
-    {
-        print("Ataaaaaaaaaaakkkkkkkkkk");
-    }
 }

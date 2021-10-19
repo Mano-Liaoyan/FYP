@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This is class is used to receive the matching teams information and broadcast them into the sub-components
+/// </summary>
 public class CharacterInfo : MonoBehaviour{
     
     [SerializeField] private List<string> FriendlyCharacters;
@@ -21,10 +24,5 @@ public class CharacterInfo : MonoBehaviour{
     void Update()
     {
         
-    }
-
-    void RecieveFriendlyPostion()
-    {
-
     }
 }

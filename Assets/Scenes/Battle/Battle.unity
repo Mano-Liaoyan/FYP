@@ -2386,6 +2386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 500
+  randomIdx: -1
 --- !u!1 &1321299784
 GameObject:
   m_ObjectHideFlags: 0

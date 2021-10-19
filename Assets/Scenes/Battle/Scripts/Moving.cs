@@ -22,11 +22,11 @@ public class Moving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        obj.position = Vector3.MoveTowards(obj.position, EndPoint, speed * Time.deltaTime);
-        if (Vector3.Distance(obj.position, EndPoint) < 0.001f)
-        {
-            this.GetComponent<Moving>().enabled = false;
-        }
+        //obj.position = Vector3.MoveTowards(obj.position, EndPoint, speed * Time.deltaTime);
+        //if (Vector3.Distance(obj.position, EndPoint) < 0.001f)
+        //{
+        //    this.GetComponent<Moving>().enabled = false;
+        //}
     }
 
 }

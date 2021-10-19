@@ -40,11 +40,8 @@ public class CharacterSlotInfos : MonoBehaviour
 
     public void OnclickAttack()
     {
+        BattleDataManager.currentIndex = CharacterIdx;
         print("onclickAttack()");
-        BattleLogicManager.updateMovement(Character, Random.Range(0, BattleDataManager.EnemyCharactersPostions.Count));
-        EventCenter.Instance.TriggerEventListener("Attack");
-        //BattleLogicManager.updateMovement(Character);
-        //BattleDataManager.OnAttackClick(CharacterIdx);
-        //this.GetComponent<Moving>().enabled = true;
+        BattleLogicManager.UpdateMovement(Character, Random.Range(0, BattleDataManager.EnemyCharactersPostions.Count));
     }
 }
