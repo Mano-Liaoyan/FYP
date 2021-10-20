@@ -63,7 +63,7 @@ public class MonsterAnimationManager : MonoBehaviour
         // Test Attacking
         if (Input.GetMouseButtonUp(0))
         {
-            _animator.SetTrigger("LeftMouseClick");
+            //_animator.SetTrigger("LeftMouseClick");
         }
 
         // Test Hurt
