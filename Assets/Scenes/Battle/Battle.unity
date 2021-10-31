@@ -1702,6 +1702,7 @@ GameObject:
   - component: {fileID: 1050182205}
   - component: {fileID: 1050182204}
   - component: {fileID: 1050182208}
+  - component: {fileID: 1050182209}
   m_Layer: 5
   m_Name: Character_Info
   m_TagString: Untagged
@@ -1783,7 +1784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1819,6 +1820,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7429c688973454f46a441cd1deae4419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1050182209
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050182202}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1057841587
 GameObject:
   m_ObjectHideFlags: 0

@@ -83,6 +83,7 @@ public class BattleLogicManager : MonoBehaviour
             currObj.transform.Rotate(Vector3.up, 180);
             isBack = false;
             endAttack = false;
+            EventCenter.Instance.TriggerEventListener("ActiveSlots");
         }
 
     }
