@@ -72,7 +72,7 @@ public class FriendlyChracter : MonoBehaviour
         obj.transform.localPosition = new Vector3(-x, intervel * (y * 0.4f) - 80, 0);
         BattleDataManager.FriendlyCharactersPostions.Insert(index, obj.transform.localPosition);
         isFinishLoad = true;
-        print("load finish");
+        //print("load finish");
         GameObject.Find("GameManager").SendMessage("findAllCharacter");
     }
 
