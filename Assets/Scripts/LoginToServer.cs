@@ -8,7 +8,7 @@ using TMPro;
 public class LoginToServer : MonoBehaviour
 {
     private const string Scheme = "http";
-    private const string Host = "20.94.197.30";
+    private const string Host = "81.71.41.8";
     private const int Port = 7350;
     private const string ServerKey = "defaultkey";
 
