@@ -40,8 +40,9 @@ public class CharacterSlotInfos : MonoBehaviour
 
     public void OnclickAttack()
     {
+        EventCenter.Instance.TriggerEventListener("DisableSlots");
         BattleDataManager.currentIndex = CharacterIdx;
         print("onclickAttack()");
-        BattleLogicManager.UpdateMovement(Character, Random.Range(0, BattleDataManager.EnemyCharactersPostions.Count));
+        BattleLogicManager.UpdateFriendlyMovement(Character, Random.Range(0, BattleDataManager.EnemyCharactersPostions.Count));
     }
 }

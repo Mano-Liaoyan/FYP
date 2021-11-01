@@ -18,10 +18,7 @@ public class FriendlyChracter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(BattleDataManager.isAnimating == true)
-        {
 
-        }
     }
 
     void ReceiveCharactersMessage(List<string> Characters)
@@ -72,21 +69,7 @@ public class FriendlyChracter : MonoBehaviour
         obj.transform.localPosition = new Vector3(-x, intervel * (y * 0.4f) - 80, 0);
         BattleDataManager.FriendlyCharactersPostions.Insert(index, obj.transform.localPosition);
         isFinishLoad = true;
-        print("load finish");
+        //print("load finish");
         GameObject.Find("GameManager").SendMessage("findAllCharacter");
-    }
-
-    void RecieveSkills(object[] message)
-    {
-        int characterIndex = (int)message[0], randomIdx = (int)message[1];
-        Vector3 myPosition = BattleDataManager.FriendlyCharactersPostions[characterIndex];
-        print($"v31 {myPosition}");
-        Vector3 targetPosition = BattleDataManager.EnemyCharactersPostions[randomIdx];
-        print($"v32 {targetPosition}");
-        BattleDataManager.FriendlyCharactersPostions[characterIndex] = Vector3.MoveTowards(myPosition, targetPosition, 10 * Time.deltaTime);
-        if (Vector3.Distance(myPosition,targetPosition ) < 0.001f)
-        {
-            BattleDataManager.isAnimating = false;
-        }
     }
 }

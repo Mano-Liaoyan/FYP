@@ -34,15 +34,26 @@ public class BattleDataManager : MonoBehaviour
         GameObject enemies = GameObject.Find("Character_Enemy");
         FriendlyCharacters = findChild(friends);
         EnemyCharacters = findChild(enemies);
-        foreach(GameObject friend in FriendlyCharacters)
+        int i = 0;
+        foreach (GameObject friend in FriendlyCharacters)
         {
             MoveSwitch.Add(false);
+            friend.GetComponent<Character>().myIndex = i++;
+            friend.GetComponent<Character>().chracterType = "F"; // F means friendly
+        }
+        i = 0;
+        foreach (GameObject enemy in EnemyCharacters)
+        {
+            MoveSwitch.Add(false);
+            enemy.GetComponent<Character>().myIndex = i++;
+            enemy.GetComponent<Character>().chracterType = "E"; // E means enemy
         }
     }
+
     public List<GameObject> findChild(GameObject father)
     {
         List<GameObject> childs = new List<GameObject>();
-        foreach(Transform child in father.transform)
+        foreach (Transform child in father.transform)
         {
             childs.Add(child.gameObject);
         }
@@ -56,7 +67,7 @@ public class BattleDataManager : MonoBehaviour
     }
 
     public static void OnAttackClick(int TargetID)
-    {        
+    {
 
     }
 
