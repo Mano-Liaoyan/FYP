@@ -72,18 +72,4 @@ public class FriendlyChracter : MonoBehaviour
         //print("load finish");
         GameObject.Find("GameManager").SendMessage("findAllCharacter");
     }
-
-    void RecieveSkills(object[] message)
-    {
-        int characterIndex = (int)message[0], randomIdx = (int)message[1];
-        Vector3 myPosition = BattleDataManager.FriendlyCharactersPostions[characterIndex];
-        print($"v31 {myPosition}");
-        Vector3 targetPosition = BattleDataManager.EnemyCharactersPostions[randomIdx];
-        print($"v32 {targetPosition}");
-        BattleDataManager.FriendlyCharactersPostions[characterIndex] = Vector3.MoveTowards(myPosition, targetPosition, 10 * Time.deltaTime);
-        if (Vector3.Distance(myPosition,targetPosition ) < 0.001f)
-        {
-            BattleDataManager.isAnimating = false;
-        }
-    }
 }

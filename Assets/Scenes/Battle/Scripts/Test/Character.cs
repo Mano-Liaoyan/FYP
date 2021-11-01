@@ -10,12 +10,21 @@ public class Character : MonoBehaviour
     [SerializeField] protected float movingSpeed = 5.0f;
     protected Vector3 myPosition;
 
+    void Start()
+    {
+        EventCenter.Instance.AddEventListener("GetHurt", GetHurt);
+    }
 
-    protected IEnumerator IEMoveCharacter(Vector3 startPoint, Vector3 endPoint)
+    public void GetHurt()
+    {
+        gameObject.GetComponent<Animator>().Play("Hurt");
+    }
+
+    protected IEnumerator IEMoveCharacter(Vector3 startPoint, Vector3 endPoint, float offset = 0f)
     {
         Vector3 currentPoint = startPoint;
 
-        while (Vector3.Distance(currentPoint, endPoint) > 1f)
+        while (Vector3.Distance(currentPoint, endPoint) > 1f + offset)
         {
             currentPoint = Vector3.MoveTowards(currentPoint, endPoint, movingSpeed);
             transform.localPosition = currentPoint;
@@ -38,7 +47,7 @@ public class Character : MonoBehaviour
         transform.Rotate(Vector3.up, 180);
     }
 
-    public virtual void Attack(Vector3 endPoint) { }
+    public virtual void Attack(Vector3 endPoint, GameObject targetObj) { }
 
 
 }
