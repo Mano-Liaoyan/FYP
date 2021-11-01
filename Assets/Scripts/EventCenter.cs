@@ -18,6 +18,11 @@ public class EventInfo<T> : IEventInfo
     public UnityAction<T> action;
 }
 
+public class EventInfo<T, X> : IEventInfo
+{
+    public UnityAction<T, X> action;
+}
+
 public class EventCenter
 {
     private static EventCenter instance;
@@ -54,6 +59,17 @@ public class EventCenter
             EventDict.Add(eventName, new EventInfo<T>() { action = action });
     }
 
+    // Add event with 2 args
+    public void AddEventListener<T, X>(string eventName, UnityAction<T, X> action)
+    {
+        // If the dictionary contains the event, add the action to the event
+        if (EventDict.ContainsKey(eventName))
+            (EventDict[eventName] as EventInfo<T, X>).action += action;
+        // Else, create a new event
+        else
+            EventDict.Add(eventName, new EventInfo<T, X>() { action = action });
+    }
+
     // Remove event with 0 args
     public void RemoveEventListener(string eventName, UnityAction action)
     {
@@ -70,6 +86,14 @@ public class EventCenter
             (EventDict[eventName] as EventInfo<T>).action -= action;
     }
 
+    // Remove event with 2 args
+    public void RemoveEventListener<T, X>(string eventName, UnityAction<T, X> action)
+    {
+        // If the dictionary contains the event, remove the action from the event
+        if (EventDict.ContainsKey(eventName))
+            (EventDict[eventName] as EventInfo<T, X>).action -= action;
+    }
+
     // Trigger event with 0 args
     public void TriggerEventListener(string eventName)
     {
@@ -84,6 +108,14 @@ public class EventCenter
         // If the dictionary contains the event, broadcast the event
         if (EventDict.ContainsKey(eventName))
             (EventDict[eventName] as EventInfo<T>).action?.Invoke(param);
+    }
+
+    // Trigger event with 2 args
+    public void TriggerEventListener<T, X>(string eventName, T param1, X param2)
+    {
+        // If the dictionary contains the event, broadcast the event
+        if (EventDict.ContainsKey(eventName))
+            (EventDict[eventName] as EventInfo<T, X>).action?.Invoke(param1, param2);
     }
 
     // Clear event
