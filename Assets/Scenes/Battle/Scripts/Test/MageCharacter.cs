@@ -11,19 +11,21 @@ public class MageCharacter : Character
 
     public override void Attack(Vector3 endPoint)
     {
-        StartCoroutine(MageAttack(endPoint));
+        Vector3 endPointDirection = endPoint - myPosition;
+        StartCoroutine(MageAttack(endPointDirection));
     }
 
-    public IEnumerator MageAttack(Vector3 endPoint)
+    public IEnumerator MageAttack(Vector3 direction)
     {
         Vector3 z_offset = new Vector3(0, 0, -20);
-        Quaternion y_rotate = Quaternion.Euler(0, 90, 0);
+        Quaternion rotation = Quaternion.Euler(-Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg, 90, 0);
+        gameObject.GetComponent<Animator>().SetTrigger("LeftMouseClick");
         GameObject skill = (GameObject)Instantiate(Resources.Load($"Prefab/VFX/Modify Magic Ice"),
-            transform.position + z_offset, y_rotate);
+            transform.position + z_offset, rotation);
         yield return new WaitForSeconds(2f);
         EventCenter.Instance.TriggerEventListener("ActiveSlots");
         Destroy(skill);
-        
+
     }
 
 }
