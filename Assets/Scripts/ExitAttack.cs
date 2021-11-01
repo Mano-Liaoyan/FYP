@@ -8,6 +8,7 @@ public class ExitAttack : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         EventCenter.Instance.TriggerEventListener<int>("StartAttack",BattleDataManager.targetIndex);
+        EventCenter.Instance.TriggerEventListener("NecromancerAttack"); 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -1,4 +1,5 @@
-﻿#if UNITY_EDITOR
+﻿#pragma warning disable 0618
+#if UNITY_EDITOR
 namespace Mapbox.Unity.Telemetry
 {
 	using System.Collections.Generic;
@@ -10,7 +11,6 @@ namespace Mapbox.Unity.Telemetry
 	using System.Text;
 	using UnityEditor;
 	using UnityEngine.Networking;
-
 	public class TelemetryEditor : ITelemetryLibrary
 	{
 		string _url;

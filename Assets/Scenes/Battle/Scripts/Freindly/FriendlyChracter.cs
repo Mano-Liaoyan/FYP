@@ -18,10 +18,7 @@ public class FriendlyChracter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(BattleDataManager.isAnimating == true)
-        {
 
-        }
     }
 
     void ReceiveCharactersMessage(List<string> Characters)

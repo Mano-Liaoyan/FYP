@@ -9,7 +9,7 @@ public struct Skill
     public int maxUsingTimes;
 }
 
-public struct CharactorData
+public struct CharactorDataStruct
 {
     public string name;
     public Vector3 currentPostion;
