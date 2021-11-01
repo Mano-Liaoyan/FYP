@@ -8,7 +8,7 @@ public class NecromancerMagic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventCenter.Instance.AddEventListener("NecromancerAttack", Attack);
+
     }
 
     // Update is called once per frame
