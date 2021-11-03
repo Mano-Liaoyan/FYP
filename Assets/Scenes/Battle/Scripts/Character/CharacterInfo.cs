@@ -1,5 +1,6 @@
 using Nakama;
-using Nakama.TinyJson;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,14 +11,13 @@ using UnityEngine;
 /// <summary>
 /// This is class is used to receive the matching teams information and broadcast them into the sub-components
 /// </summary>
-public class CharacterInfo : MonoBehaviour{
-    
+public class CharacterInfo : MonoBehaviour {
+
     [SerializeField] private List<string> FriendlyCharacters;
     [SerializeField] private List<string> EnemyCharacters;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         //FriendlyCharacters = BattleDataManager.FriendlyCharacters;
         //EnemyCharacters = BattleDataManager.EnemyCharacters;
         GameObject.Find("Character_Friendly").SendMessage("ReceiveCharactersMessage", FriendlyCharacters);
@@ -44,51 +44,27 @@ public class CharacterInfo : MonoBehaviour{
             }
         };
         IApiStorageObjects result = await User.client.ReadStorageObjectsAsync(User.session, readObject);
-        //print(result);
-        //print(result.Objects.First());
-        //var storageObject = result.Objects.First();
-
-        //print(storageObject.Value.ToCharArray());
-        //var tmp = storageObject.Value.ToJson();
-        //print(tmp);
         if (result.Objects.Any()) {
             var storageObject = result.Objects.First();
-            print(storageObject);
-            print(storageObject.Value);
-            try {
-                var character123 = JsonParser.FromJson<character>(storageObject.Value);
-                print(character123);
-                print(character123.characters);
-                print(character123.characters.ToString());
-                Debug.LogFormat("Title: {0}", character123.characters);
-            } catch (Exception e) {
-                print(e.Data);
-                print(e.Message);
-            }
-
+            var res = JsonConvert.DeserializeObject<CharacterJson>(storageObject.Value);
+            print(res.characters);
+            int i = 0;
+            foreach (var character in res.characters)
+                print($"Character {i++}: name:{character.monster_name},level:{character.level}");
         }
-
-
-
-        //var res = Mapbox.Json.Linq.JObject.Parse(tmp);
-
-        //print(storageObject.Value.ToString());
-        //print(storageObject.Value.ToString();
-
     }
 
 
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() {
+
     }
 }
-public class characters {
-    public string name;
-    public int level;
+public class CharacterData {
+    public string monster_name { get; set; }
+    public int level { get; set; }
 }
-public class character {
-    public string characters;
+public class CharacterJson {
+    public IList<CharacterData> characters { get; set; }
 }

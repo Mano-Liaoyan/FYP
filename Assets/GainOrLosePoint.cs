@@ -62,7 +62,7 @@ public class GainOrLosePoint : MonoBehaviour
 //        }
     }
 
-    public static void examineLocation(string buildingName)
+    public static async void examineLocation(string buildingName)
     {
         if (buildingName.Contains("uic"))
         {
@@ -71,7 +71,7 @@ public class GainOrLosePoint : MonoBehaviour
         {
             addScore();
         }
-        examineUpdateScoreAsync();
+        await examineUpdateScoreAsync();
     }
 
     public static async Task examineUpdateScoreAsync() {
