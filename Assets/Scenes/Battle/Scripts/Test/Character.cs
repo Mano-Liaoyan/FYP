@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public string myName;
     public int myIndex;
     public string chracterType;
     [SerializeField] protected float movingSpeed = 5.0f;

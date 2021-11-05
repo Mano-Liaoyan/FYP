@@ -847,7 +847,7 @@ PrefabInstance:
     - target: {fileID: 212936070348459978, guid: 7086e685ceb361f499307920bc125c21, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 4b2120d7af651734bbcb5ba278fa66b9, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 212936070348459978, guid: 7086e685ceb361f499307920bc125c21, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -862,7 +862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212936070348459978, guid: 7086e685ceb361f499307920bc125c21, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 212978795559885070, guid: 7086e685ceb361f499307920bc125c21, type: 3}
       propertyPath: m_Sprite
@@ -916,6 +916,22 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5456554018018551374, guid: 7086e685ceb361f499307920bc125c21, type: 3}
+      propertyPath: Sprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5456554018018551374, guid: 7086e685ceb361f499307920bc125c21, type: 3}
+      propertyPath: Sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4b2120d7af651734bbcb5ba278fa66b9, type: 3}
+    - target: {fileID: 5456554018018551374, guid: 7086e685ceb361f499307920bc125c21, type: 3}
+      propertyPath: Sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 322c06659e3ab354f90f8852e674d43c, type: 3}
+    - target: {fileID: 5456554018018551374, guid: 7086e685ceb361f499307920bc125c21, type: 3}
+      propertyPath: Sprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 09bf2402d537e554595bff055e2b7525, type: 3}
     - target: {fileID: 6290436203591938676, guid: 7086e685ceb361f499307920bc125c21, type: 3}
       propertyPath: Sprites.Array.size
       value: 3

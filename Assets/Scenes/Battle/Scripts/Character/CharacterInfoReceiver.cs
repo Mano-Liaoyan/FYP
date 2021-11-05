@@ -44,11 +44,11 @@ public class CharacterInfoReceiver : MonoBehaviour
 
     void DisableSlots()
     {
-        this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     void ActiveSlots()
     {
-        this.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 }

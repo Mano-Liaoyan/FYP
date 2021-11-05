@@ -31,7 +31,6 @@ public class BattleLogicManager : MonoBehaviour
         {
             if (BattleDataManager.FriendlyCharacters[i].name.Contains(character))
             {
-                //EventCenter.Instance.TriggerEventListener<string, int>("RotateCharacter", "F", i);
                 BattleDataManager.FriendlyCharacters[i].GetComponent<Character>().Attack(EndPoint, targetObj);
             }
         }
