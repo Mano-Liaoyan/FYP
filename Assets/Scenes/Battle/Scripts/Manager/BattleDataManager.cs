@@ -17,7 +17,6 @@ public class BattleDataManager : MonoBehaviour
     public static object[] message = new object[2];
     public static List<GameObject> FriendlyCharacters;
     public static List<GameObject> EnemyCharacters;
-    public static List<bool> MoveSwitch = new List<bool>();
     public static Vector3 Endpoint;
 
     void Awake()
@@ -34,18 +33,15 @@ public class BattleDataManager : MonoBehaviour
         GameObject enemies = GameObject.Find("Character_Enemy");
         FriendlyCharacters = findChild(friends);
         EnemyCharacters = findChild(enemies);
-        int i = 0;
+        int i = 0, j = 0;
         foreach (GameObject friend in FriendlyCharacters)
         {
-            MoveSwitch.Add(false);
             friend.GetComponent<Character>().myIndex = i++;
             friend.GetComponent<Character>().chracterType = "F"; // F means friendly
         }
-        i = 0;
         foreach (GameObject enemy in EnemyCharacters)
         {
-            MoveSwitch.Add(false);
-            enemy.GetComponent<Character>().myIndex = i++;
+            enemy.GetComponent<Character>().myIndex = j++;
             enemy.GetComponent<Character>().chracterType = "E"; // E means enemy
         }
     }
@@ -58,17 +54,6 @@ public class BattleDataManager : MonoBehaviour
             childs.Add(child.gameObject);
         }
         return childs;
-    }
-
-
-    void Update()
-    {
-
-    }
-
-    public static void OnAttackClick(int TargetID)
-    {
-
     }
 
 }
