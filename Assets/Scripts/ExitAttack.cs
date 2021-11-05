@@ -19,7 +19,7 @@ public class ExitAttack : StateMachineBehaviour
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        EventCenter.Instance.TriggerEventListener("ExitAttack");
+        EventCenter.Instance.TriggerEventListener("ExitAttack",false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

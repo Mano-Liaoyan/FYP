@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class MeleeCharacter : Character
 {
-    private bool isAttacking = false;
+    private bool isAttacking;
 
 
     void Start()
     {
+        isAttacking = false;
         myPosition = transform.localPosition;
         //EventCenter.Instance.AddEventListener<string, int>("RotateCharacter", RotateCharacter);
-        EventCenter.Instance.AddEventListener("ExitAttack", ReverseAttackStates);
+        EventCenter.Instance.AddEventListener<bool>("ExitAttack", SetAttackStates);
     }
 
     public override void Attack(Vector3 endPoint, GameObject targetObj)
@@ -22,7 +23,7 @@ public class MeleeCharacter : Character
     public IEnumerator MeleeAttack(Vector3 endPoint, GameObject targetObj)
     {
         float offset = 200f;
-        ReverseAttackStates();
+        SetAttackStates(true);
         yield return StartCoroutine(IEMoveCharacter(myPosition, endPoint, offset));
         gameObject.GetComponent<Animator>().SetTrigger("LeftMouseClick");
         targetObj.GetComponent<Character>().GetHurt();
@@ -33,8 +34,8 @@ public class MeleeCharacter : Character
         EventCenter.Instance.TriggerEventListener("ActiveSlots");
     }
 
-    private void ReverseAttackStates()
+    private void SetAttackStates(bool state)
     {
-        isAttacking = !isAttacking;
+        isAttacking = state;
     }
 }
