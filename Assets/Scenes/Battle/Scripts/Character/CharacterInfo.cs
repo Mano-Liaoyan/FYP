@@ -26,7 +26,6 @@ public class CharacterInfo : MonoBehaviour
     public async Task FetchUserCharactersAsync()
     {
         var res = await User.client.RpcAsync(User.session, "getCharacter");
-        print($"rps res: {res.Payload}");
         CharacterJson cj = JsonUtility.FromJson<CharacterJson>(res.Payload);
         var character_list = cj.characters;
         foreach (var character in character_list)
@@ -39,7 +38,6 @@ public class CharacterInfo : MonoBehaviour
         // Send infos to another client
         long opCode = 101; // 101 means send my player character info
         string json = JsonUtility.ToJson(cj);
-        print($"json: {json}");
         await User.battleSocket.SendMatchStateAsync(BattleDataManager.matchId, opCode, json);
         /*
         var readObject = new[] {
@@ -71,10 +69,8 @@ public class CharacterInfo : MonoBehaviour
 
     public void ReceiveEnemyChracterInfo(IMatchState matchState)
     {
-        print("Received Info!");
         User.battleSocket.ReceivedMatchState -= ReceiveEnemyChracterInfo;
         string messageJson = System.Text.Encoding.UTF8.GetString(matchState.State);
-        print($"messagejson: {messageJson}");
         if (matchState.OpCode == 101)
         {
             var character_list = JsonUtility.FromJson<CharacterJson>(messageJson).characters;
