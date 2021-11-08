@@ -1,12 +1,7 @@
 using Nakama;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -36,7 +31,7 @@ public class CharacterInfo : MonoBehaviour
         {
             var res = await User.client.RpcAsync(User.session, "getCharacter");
             print($"rps res: {res.Payload}");
-            var character_list = JsonConvert.DeserializeObject<List<CharacterData>>(res.Payload);
+            var character_list = JsonUtility.FromJson<CharacterJson>(res.Payload).characters;
             foreach (var character in character_list)
             {
                 if (character.level != -1)
@@ -86,12 +81,15 @@ public class CharacterInfo : MonoBehaviour
 
     }
 }
+[Serializable]
 public class CharacterData
 {
-    public string monster_name { get; set; }
-    public int level { get; set; }
+    public string monster_name;
+    public int level;
 }
+
+[Serializable]
 public class CharacterJson
 {
-    public IList<CharacterData> characters { get; set; }
+    public List<CharacterData> characters;
 }

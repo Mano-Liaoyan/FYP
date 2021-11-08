@@ -8,6 +8,7 @@ public class User : MonoBehaviour
     public static ISession session = null;
     public static int score = 0; // get from the server
     public static IClient client;
+    public static ISocket battleSocket;
     public static float lastTime = 0;
     public static float currTime = 0;
 

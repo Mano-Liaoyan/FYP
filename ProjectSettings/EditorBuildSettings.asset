@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Login.unity
     guid: f0184649398fd574391e40896130be46
   - enabled: 1
-    path: Assets/Scenes/Game View.unity
+    path: Assets/Scenes/Game View/Game View.unity
     guid: c6a3932699181f5449fe87ecefc5a0fe
   - enabled: 1
     path: Assets/Scenes/Battle/Battle.unity
