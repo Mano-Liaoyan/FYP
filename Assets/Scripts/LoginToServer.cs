@@ -14,16 +14,15 @@ public class LoginToServer : MonoBehaviour
 
     private const string PrefKeyName = "nakama.session";
 
-    private readonly IClient _client = new Client(Scheme, Host, Port, ServerKey);
+    private readonly Client _client = new Client(Scheme, Host, Port, ServerKey);
 
-    public SceneLoader SceneLoader;
     [SerializeField] private GameObject WarningMessage;
     [SerializeField] private GameObject PopupWindow;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame

@@ -1,5 +1,7 @@
+using Nakama;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BattleDataManager : MonoBehaviour
@@ -19,12 +21,17 @@ public class BattleDataManager : MonoBehaviour
     public static List<GameObject> EnemyCharacters;
     public static Vector3 Endpoint;
 
+    public static string matchId;
+    public static IMatchmakerMatched matched;
+
     void Awake()
     {
         FriendlyCharactersPostions = new List<Vector3>();
         EnemyCharactersPostions = new List<Vector3>();
         FriendlyCharactersName = new List<string>();
         isAnimating = false;
+        //var match = await User.battleSocket.JoinMatchAsync(matched);
+        //matchId = match.Id;
     }
 
     public void findAllCharacter()
@@ -55,5 +62,7 @@ public class BattleDataManager : MonoBehaviour
         }
         return childs;
     }
+
+
 
 }

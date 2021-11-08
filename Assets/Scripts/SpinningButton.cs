@@ -14,6 +14,6 @@ public class SpinningButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.Rotate(Vector3.up,spinningSpeed * Time.deltaTime);
+        gameObject.transform.Rotate(Vector3.back,spinningSpeed * Time.deltaTime);
     }
 }
