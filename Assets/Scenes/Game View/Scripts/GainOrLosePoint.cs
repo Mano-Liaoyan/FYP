@@ -86,10 +86,17 @@ public class GainOrLosePoint : MonoBehaviour
                 payload.Add("user_id", User.session.UserId);
                 var response = await User.client.RpcAsync(User.session, "updateUserScore", payload.ToJson());
                 print(response);
+                updateLeaderboardAsync();
             } catch (ApiResponseException ex) {
                 Debug.LogFormat("Error: {0}", ex.Message);
             }
         }
+    }
+
+    public static async Task updateLeaderboardAsync() {
+        const string leaderboardID = "score";
+        var r = await User.client.WriteLeaderboardRecordAsync(User.session, leaderboardID, User.score);
+        print(r);
     }
 
     public static void addScore()
