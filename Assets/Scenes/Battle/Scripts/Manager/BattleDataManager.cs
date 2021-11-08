@@ -16,7 +16,6 @@ public class BattleDataManager : MonoBehaviour
     public static int targetIndex;
     public static bool isAnimating;
 
-    public static object[] message = new object[2];
     public static List<GameObject> FriendlyCharacters;
     public static List<GameObject> EnemyCharacters;
     public static Vector3 Endpoint;
@@ -30,22 +29,32 @@ public class BattleDataManager : MonoBehaviour
         EnemyCharactersPostions = new List<Vector3>();
         FriendlyCharactersName = new List<string>();
         isAnimating = false;
-        //var match = await User.battleSocket.JoinMatchAsync(matched);
-        //matchId = match.Id;
     }
 
-    public void findAllCharacter()
+    async void Start()
+    {
+        var match = await User.battleSocket.JoinMatchAsync(matched);
+        matchId = match.Id;
+        print($"matchID: {matchId}");
+    }
+
+    public void FindFriendlyCharacter()
     {
         GameObject friends = GameObject.Find("Character_Friendly");
-        GameObject enemies = GameObject.Find("Character_Enemy");
-        FriendlyCharacters = findChild(friends);
-        EnemyCharacters = findChild(enemies);
-        int i = 0, j = 0;
+        FriendlyCharacters = FindChild(friends);
+        int i = 0;
         foreach (GameObject friend in FriendlyCharacters)
         {
             friend.GetComponent<Character>().myIndex = i++;
             friend.GetComponent<Character>().chracterType = "F"; // F means friendly
         }
+    }
+
+    public void FindEnemyCharacter()
+    {
+        GameObject enemies = GameObject.Find("Character_Enemy");
+        EnemyCharacters = FindChild(enemies);
+        int j = 0;
         foreach (GameObject enemy in EnemyCharacters)
         {
             enemy.GetComponent<Character>().myIndex = j++;
@@ -53,7 +62,7 @@ public class BattleDataManager : MonoBehaviour
         }
     }
 
-    public List<GameObject> findChild(GameObject father)
+    public List<GameObject> FindChild(GameObject father)
     {
         List<GameObject> childs = new List<GameObject>();
         foreach (Transform child in father.transform)

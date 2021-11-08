@@ -11,13 +11,15 @@ using UnityEngine;
 public class CharacterInfo : MonoBehaviour
 {
     private List<string> FriendlyCharacters;
-    [SerializeField] private List<string> EnemyCharacters;
+    /*[SerializeField] */
+    private List<string> EnemyCharacters;
 
     // Start is called before the first frame update
     async void Start()
     {
+        User.battleSocket.ReceivedMatchState += ReceiveEnemyChracterInfo;
         FriendlyCharacters = new List<string>();
-        //EnemyCharacters = BattleDataManager.EnemyCharacters;
+        EnemyCharacters = new List<string>();
         await FetchUserCharactersAsync();
         GameObject.Find("Character_Friendly").SendMessage("ReceiveCharactersMessage", FriendlyCharacters);
         GameObject.Find("Character_Enemy").SendMessage("ReceiveCharactersMessage", EnemyCharacters);
@@ -39,11 +41,16 @@ public class CharacterInfo : MonoBehaviour
                     FriendlyCharacters.Add(character.monster_name);
                 }
             }
+            try
+            {
+                long opCode = 101; // 101 means send my player character info
+                string json = JsonUtility.ToJson(res.Payload);
+                print($"json: {json}");
+                await User.battleSocket.SendMatchStateAsync(BattleDataManager.matchId, opCode, json);
+            }
+            catch (ApiResponseException ex) { Debug.LogFormat("Error: {0}", ex.Message); }
         }
-        catch (ApiResponseException ex)
-        {
-            Debug.LogFormat("Error: {0}", ex.Message);
-        }
+        catch (ApiResponseException ex) { Debug.LogFormat("Error: {0}", ex.Message); }
 
         /*
         var readObject = new[] {
@@ -73,6 +80,23 @@ public class CharacterInfo : MonoBehaviour
         }*/
     }
 
+    public void ReceiveEnemyChracterInfo(IMatchState matchState)
+    {
+        string messageJson = System.Text.Encoding.UTF8.GetString(matchState.State);
+        print($"messagejson: {messageJson}");
+        if (matchState.OpCode == 101)
+        {
+            var character_list = JsonUtility.FromJson<CharacterJson>(messageJson).characters;
+            foreach (var character in character_list)
+            {
+                if (character.level != -1)
+                {
+                    EnemyCharacters.Add(character.monster_name);
+                }
+            }
+        }
+    }
+
 
 
     // Update is called once per frame
@@ -93,3 +117,4 @@ public class CharacterJson
 {
     public List<CharacterData> characters;
 }
+

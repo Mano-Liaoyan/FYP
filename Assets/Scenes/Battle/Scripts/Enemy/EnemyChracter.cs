@@ -61,6 +61,6 @@ public class EnemyChracter : MonoBehaviour
         obj.transform.localPosition = new Vector3(x, intervel * (y * 0.4f) - 80, 0);
         obj.transform.localRotation = new Quaternion(0, 180, 0, 0);
         BattleDataManager.EnemyCharactersPostions.Insert(index, obj.transform.localPosition);
-        GameObject.Find("GameManager").SendMessage("findAllCharacter");
+        GameObject.Find("GameManager").SendMessage("FindEnemyCharacter");
     }
 }

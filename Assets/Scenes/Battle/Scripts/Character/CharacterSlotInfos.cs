@@ -42,7 +42,6 @@ public class CharacterSlotInfos : MonoBehaviour
     {
         EventCenter.Instance.TriggerEventListener("DisableSlots");
         BattleDataManager.currentIndex = CharacterIdx;
-        print("onclickAttack()");
         BattleLogicManager.UpdateFriendlyMovement(Character, Random.Range(0, BattleDataManager.EnemyCharactersPostions.Count));
     }
 }

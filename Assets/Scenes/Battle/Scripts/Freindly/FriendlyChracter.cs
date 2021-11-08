@@ -70,6 +70,6 @@ public class FriendlyChracter : MonoBehaviour
         BattleDataManager.FriendlyCharactersPostions.Insert(index, obj.transform.localPosition);
         isFinishLoad = true;
         //print("load finish");
-        GameObject.Find("GameManager").SendMessage("findAllCharacter");
+        GameObject.Find("GameManager").SendMessage("FindFriendlyCharacter");
     }
 }

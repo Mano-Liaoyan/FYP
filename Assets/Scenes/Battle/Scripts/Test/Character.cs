@@ -34,7 +34,6 @@ public class Character : MonoBehaviour
     // Roate character by 180 degree
     protected IEnumerator RotateCharacter(string type, int index)
     {
-        print($"Inside Rotate! {index}");
         if (myIndex == index && chracterType.Equals(type))
             transform.Rotate(Vector3.up, 180);
         yield return null;

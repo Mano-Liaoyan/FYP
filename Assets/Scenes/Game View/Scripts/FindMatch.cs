@@ -25,12 +25,13 @@ public class FindMatch : MonoBehaviour
 
     public async void Match()
     {
+        InfoMessage.GetComponent<TMP_Text>().text = "";
         PopupWindow.SetActive(true);
-        SpiningImage.SetActive(true);
+        if (!SpiningImage.activeSelf) SpiningImage.SetActive(true);
         User.battleSocket = User.client.NewSocket();
         User.battleSocket.ReceivedMatchmakerMatched += OnMatchmakerMatched;// Register callback function
         await User.battleSocket.ConnectAsync(User.session, true, 30);
-        print($"Socket Connected!");        
+        print($"Socket Connected!");
         ticket = await User.battleSocket.AddMatchmakerAsync("*", 2, 2, null, null);
         print($"Got ticket!");
         print(ticket);
@@ -38,7 +39,10 @@ public class FindMatch : MonoBehaviour
 
     public async void CancelMatch()
     {
+        InfoMessage.GetComponent<TMP_Text>().text = "Canceling!";
         await User.battleSocket.RemoveMatchmakerAsync(ticket);
+        SpiningImage.SetActive(false);
+        User.battleSocket.ReceivedMatchmakerMatched += OnMatchmakerMatched;
         PopupWindow.SetActive(false);
     }
 
@@ -46,16 +50,16 @@ public class FindMatch : MonoBehaviour
     {
         print($"Matched!");
         User.battleSocket.ReceivedMatchmakerMatched -= OnMatchmakerMatched; // Unregister callback function
-        print("Loadinddddddddddd");
         UnityMainThreadDispatcher.Instance().Enqueue(Load(matched));
     }
 
 
     public IEnumerator Load(IMatchmakerMatched matched)
     {
-        print("Inside loader");
-
         BattleDataManager.matched = matched;
+        InfoMessage.GetComponent<TMP_Text>().text = "Matched!";
+        yield return new WaitForSeconds(2);
+        PopupWindow.SetActive(false);
         SceneLoader.LoadSceneAsync("Battle"); // Switch scene to battle scene
         yield return null;
     }

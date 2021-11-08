@@ -76,8 +76,8 @@ public class GainOrLosePoint : MonoBehaviour
 
     public static async Task examineUpdateScoreAsync() {
         if (Time.realtimeSinceStartup - User.lastTime > 5) {
-            print("Time: " + Time.realtimeSinceStartup);
-            print("Score: " + User.score);
+            //print("Time: " + Time.realtimeSinceStartup);
+            //print("Score: " + User.score);
             User.lastTime = Time.realtimeSinceStartup;
         
             try {
@@ -85,7 +85,7 @@ public class GainOrLosePoint : MonoBehaviour
                 payload.Add("score", Convert.ToString(User.score));
                 payload.Add("user_id", User.session.UserId);
                 var response = await User.client.RpcAsync(User.session, "updateUserScore", payload.ToJson());
-                print(response);
+                //print(response);
             } catch (ApiResponseException ex) {
                 Debug.LogFormat("Error: {0}", ex.Message);
             }
