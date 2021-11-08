@@ -60,6 +60,7 @@ public class FindMatch : MonoBehaviour
         InfoMessage.GetComponent<TMP_Text>().text = "Matched!";
         yield return new WaitForSeconds(2);
         PopupWindow.SetActive(false);
+        SpiningImage.SetActive(false);
         SceneLoader.LoadSceneAsync("Battle"); // Switch scene to battle scene
         yield return null;
     }

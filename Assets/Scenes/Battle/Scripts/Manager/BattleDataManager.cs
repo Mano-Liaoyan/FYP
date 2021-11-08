@@ -23,19 +23,23 @@ public class BattleDataManager : MonoBehaviour
     public static string matchId;
     public static IMatchmakerMatched matched;
 
-    void Awake()
+    public GameObject Play_Type;
+
+    async void Awake()
     {
         FriendlyCharactersPostions = new List<Vector3>();
         EnemyCharactersPostions = new List<Vector3>();
         FriendlyCharactersName = new List<string>();
         isAnimating = false;
-    }
-
-    async void Start()
-    {
         var match = await User.battleSocket.JoinMatchAsync(matched);
         matchId = match.Id;
         print($"matchID: {matchId}");
+        Play_Type.SetActive(true);
+    }
+
+    void Start()
+    {
+
     }
 
     public void FindFriendlyCharacter()

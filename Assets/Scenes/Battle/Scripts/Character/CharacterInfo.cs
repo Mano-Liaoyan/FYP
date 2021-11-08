@@ -15,43 +15,32 @@ public class CharacterInfo : MonoBehaviour
     private List<string> EnemyCharacters;
 
     // Start is called before the first frame update
-    async void Start()
+    async void OnEnable()
     {
+        print($"Inside OnEnable!, User.battleSocket status:{User.battleSocket}");
         User.battleSocket.ReceivedMatchState += ReceiveEnemyChracterInfo;
         FriendlyCharacters = new List<string>();
         EnemyCharacters = new List<string>();
         await FetchUserCharactersAsync();
-        GameObject.Find("Character_Friendly").SendMessage("ReceiveCharactersMessage", FriendlyCharacters);
-        GameObject.Find("Character_Enemy").SendMessage("ReceiveCharactersMessage", EnemyCharacters);
-        GameObject.Find("Character_Info").SendMessage("ReceiveCharactersMessage", FriendlyCharacters);
-
-
     }
     public async Task FetchUserCharactersAsync()
     {
-        try
+        var res = await User.client.RpcAsync(User.session, "getCharacter");
+        print($"rps res: {res.Payload}");
+        CharacterJson cj = JsonUtility.FromJson<CharacterJson>(res.Payload);
+        var character_list = cj.characters;
+        foreach (var character in character_list)
         {
-            var res = await User.client.RpcAsync(User.session, "getCharacter");
-            print($"rps res: {res.Payload}");
-            var character_list = JsonUtility.FromJson<CharacterJson>(res.Payload).characters;
-            foreach (var character in character_list)
+            if (character.level != -1)
             {
-                if (character.level != -1)
-                {
-                    FriendlyCharacters.Add(character.monster_name);
-                }
+                FriendlyCharacters.Add(character.monster_name);
             }
-            try
-            {
-                long opCode = 101; // 101 means send my player character info
-                string json = JsonUtility.ToJson(res.Payload);
-                print($"json: {json}");
-                await User.battleSocket.SendMatchStateAsync(BattleDataManager.matchId, opCode, json);
-            }
-            catch (ApiResponseException ex) { Debug.LogFormat("Error: {0}", ex.Message); }
         }
-        catch (ApiResponseException ex) { Debug.LogFormat("Error: {0}", ex.Message); }
-
+        // Send infos to another client
+        long opCode = 101; // 101 means send my player character info
+        string json = JsonUtility.ToJson(cj);
+        print($"json: {json}");
+        await User.battleSocket.SendMatchStateAsync(BattleDataManager.matchId, opCode, json);
         /*
         var readObject = new[] {
             new StorageObjectId {
@@ -82,6 +71,8 @@ public class CharacterInfo : MonoBehaviour
 
     public void ReceiveEnemyChracterInfo(IMatchState matchState)
     {
+        print("Received Info!");
+        User.battleSocket.ReceivedMatchState -= ReceiveEnemyChracterInfo;
         string messageJson = System.Text.Encoding.UTF8.GetString(matchState.State);
         print($"messagejson: {messageJson}");
         if (matchState.OpCode == 101)
@@ -95,14 +86,15 @@ public class CharacterInfo : MonoBehaviour
                 }
             }
         }
+        UnityMainThreadDispatcher.Instance().Enqueue(LoadChracters());
     }
 
-
-
-    // Update is called once per frame
-    void Update()
+    public IEnumerator LoadChracters()
     {
-
+        GameObject.Find("Character_Friendly").SendMessage("ReceiveCharactersMessage", FriendlyCharacters);
+        GameObject.Find("Character_Enemy").SendMessage("ReceiveCharactersMessage", EnemyCharacters);
+        GameObject.Find("Character_Info").SendMessage("ReceiveCharactersMessage", FriendlyCharacters);
+        yield return null;
     }
 }
 [Serializable]
