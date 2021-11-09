@@ -24,6 +24,7 @@ public class CharacterInfoReceiver : MonoBehaviour
 
     void ReceiveCharactersMessage(List<string> Characters)
     {
+        print("Inside slots info");
         Character_Info = GameObject.Find("Character_Info");
         parentRectTransform = Character_Info.GetComponent<RectTransform>();
         parentSize = parentRectTransform.rect.size;

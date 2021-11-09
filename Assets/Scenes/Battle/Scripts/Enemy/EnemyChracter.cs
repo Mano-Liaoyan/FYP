@@ -23,6 +23,7 @@ public class EnemyChracter : MonoBehaviour
 
     void ReceiveCharactersMessage(List<string> Characters)
     {
+        print("Inside ER");
         Character_Enemy = GameObject.Find("Character_Enemy");
         parentRectTransform = Character_Enemy.GetComponent<RectTransform>();
         parentSize = parentRectTransform.rect.size;
@@ -61,6 +62,6 @@ public class EnemyChracter : MonoBehaviour
         obj.transform.localPosition = new Vector3(x, intervel * (y * 0.4f) - 80, 0);
         obj.transform.localRotation = new Quaternion(0, 180, 0, 0);
         BattleDataManager.EnemyCharactersPostions.Insert(index, obj.transform.localPosition);
-        GameObject.Find("GameManager").SendMessage("findAllCharacter");
+        GameObject.Find("GameManager").SendMessage("FindEnemyCharacter");
     }
 }

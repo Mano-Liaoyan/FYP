@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7210189843474611644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3060966273993478657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c627b5c91a2784386a637be0c995c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myIndex: 0
+  chracterType: 
+  HealthBar: {fileID: 4932047332618313685}
+  HealthBarFill: {fileID: 6718574624917670465}
+  movingSpeed: 5
+--- !u!114 &1754821778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3060966273993478657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322764f87417d6149a4cb519efdbaaa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 100
 --- !u!114 &1754821777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17,35 +47,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2a1e64de7e1da5d4aa1073977bea7562, type: 3}
   - {fileID: 21300000, guid: 24cf845d8725e054d88c6052724f1908, type: 3}
   displaySprite: 0
---- !u!114 &1754821778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3060966273993478657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322764f87417d6149a4cb519efdbaaa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 100
---- !u!114 &-7210189843474611644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3060966273993478657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c627b5c91a2784386a637be0c995c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myName: 
-  myIndex: 0
-  chracterType: 
-  movingSpeed: 5
 --- !u!114 &1754821776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,6 +600,16 @@ GameObject:
 --- !u!1 &3061242013561953447 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1462584521993130, guid: 0b3d6bfd32a8f2c4db3b49944354d234, type: 3}
+  m_PrefabInstance: {fileID: 3062031384349488909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4932047332618313685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7929893058439489752, guid: 0b3d6bfd32a8f2c4db3b49944354d234, type: 3}
+  m_PrefabInstance: {fileID: 3062031384349488909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6718574624917670465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8593898693270469964, guid: 0b3d6bfd32a8f2c4db3b49944354d234, type: 3}
   m_PrefabInstance: {fileID: 3062031384349488909}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &3061724276346711381 stripped

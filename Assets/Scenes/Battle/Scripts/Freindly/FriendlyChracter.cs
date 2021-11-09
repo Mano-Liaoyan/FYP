@@ -23,6 +23,7 @@ public class FriendlyChracter : MonoBehaviour
 
     void ReceiveCharactersMessage(List<string> Characters)
     {
+        print("Inside FR");
         Character_Friendly = GameObject.Find("Character_Friendly");
         parentRectTransform = Character_Friendly.GetComponent<RectTransform>();
         parentSize = parentRectTransform.rect.size;
@@ -70,6 +71,6 @@ public class FriendlyChracter : MonoBehaviour
         BattleDataManager.FriendlyCharactersPostions.Insert(index, obj.transform.localPosition);
         isFinishLoad = true;
         //print("load finish");
-        GameObject.Find("GameManager").SendMessage("findAllCharacter");
+        GameObject.Find("GameManager").SendMessage("FindFriendlyCharacter");
     }
 }

@@ -23,7 +23,7 @@ public class EventInfo<T, X> : IEventInfo
     public UnityAction<T, X> action;
 }
 
-public class EventCenter
+public class EventCenter : MonoBehaviour
 {
     private static EventCenter instance;
     public static EventCenter Instance
@@ -33,6 +33,24 @@ public class EventCenter
             if (instance == null) instance = new EventCenter();
             return instance;
         }
+    }
+
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (this != instance) //Preserves only the first object created.
+            Destroy(this);
+    }
+
+    void OnDestroy()
+    {
+        if (this == instance) // If a duplicate object is destroyed, it does not free the first instance created.
+            instance = null;
     }
 
     private Dictionary<string, IEventInfo> EventDict = new Dictionary<string, IEventInfo>();

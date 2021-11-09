@@ -1,12 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
     public int myIndex;
-    public string chracterType;
-    [SerializeField] protected float movingSpeed = 5.0f;
+    public string characterType;
+    private int level;
+    [SerializeField]
+    private GameObject HealthBar;
+    [SerializeField]
+    private GameObject HealthBarFill;
+    [SerializeField]
+    protected float movingSpeed = 5.0f;
     protected Vector3 myPosition;
 
     void Start()
@@ -32,21 +40,20 @@ public class Character : MonoBehaviour
     }
 
     // Roate character by 180 degree
-    protected IEnumerator RotateCharacter(string type, int index)
-    {
-        print($"Inside Rotate! {index}");
-        if (myIndex == index && chracterType.Equals(type))
-            transform.Rotate(Vector3.up, 180);
-        yield return null;
-    }
-
-    // Roate character by 180 degree
     protected void RotateCharacter()
     {
         transform.Rotate(Vector3.up, 180);
+        HealthBar.transform.Rotate(Vector3.up, 180);
     }
 
     public virtual void Attack(Vector3 endPoint, GameObject targetObj) { }
+
+    public void SetHealthBar(Sprite sp)
+    {
+        HealthBar.transform.rotation = Quaternion.identity;
+        print("Inside Set Heal Bar");
+        HealthBarFill.GetComponent<Image>().sprite = sp;
+    }
 
 
 }

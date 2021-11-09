@@ -14,9 +14,7 @@ public class BattleDataManager : MonoBehaviour
 
     public static int currentIndex;
     public static int targetIndex;
-    public static bool isAnimating;
 
-    public static object[] message = new object[2];
     public static List<GameObject> FriendlyCharacters;
     public static List<GameObject> EnemyCharacters;
     public static Vector3 Endpoint;
@@ -24,36 +22,55 @@ public class BattleDataManager : MonoBehaviour
     public static string matchId;
     public static IMatchmakerMatched matched;
 
-    void Awake()
+    public GameObject Play_Type;
+
+    private Sprite HealthBarGreen;
+    private Sprite HealthBarRed;
+
+    async void OnEnable()
     {
         FriendlyCharactersPostions = new List<Vector3>();
         EnemyCharactersPostions = new List<Vector3>();
         FriendlyCharactersName = new List<string>();
-        isAnimating = false;
-        //var match = await User.battleSocket.JoinMatchAsync(matched);
-        //matchId = match.Id;
+        var match = await User.battleSocket.JoinMatchAsync(matched);
+        matchId = match.Id;
+        print($"matchID: {matchId}");
+        Play_Type.SetActive(true);
     }
 
-    public void findAllCharacter()
+    void Start()
+    {
+        HealthBarGreen = Resources.Load<Sprite>("Images/HealthBarGreen");
+        HealthBarRed = Resources.Load<Sprite>("Images/HealthBarRed");
+    }
+
+    public void FindFriendlyCharacter()
     {
         GameObject friends = GameObject.Find("Character_Friendly");
-        GameObject enemies = GameObject.Find("Character_Enemy");
-        FriendlyCharacters = findChild(friends);
-        EnemyCharacters = findChild(enemies);
-        int i = 0, j = 0;
+        FriendlyCharacters = FindChild(friends);
+        int i = 0;
         foreach (GameObject friend in FriendlyCharacters)
         {
             friend.GetComponent<Character>().myIndex = i++;
-            friend.GetComponent<Character>().chracterType = "F"; // F means friendly
-        }
-        foreach (GameObject enemy in EnemyCharacters)
-        {
-            enemy.GetComponent<Character>().myIndex = j++;
-            enemy.GetComponent<Character>().chracterType = "E"; // E means enemy
+            friend.GetComponent<Character>().characterType = "F"; // F means friendly
+            friend.GetComponent<Character>().SetHealthBar(HealthBarGreen);
         }
     }
 
-    public List<GameObject> findChild(GameObject father)
+    public void FindEnemyCharacter()
+    {
+        GameObject enemies = GameObject.Find("Character_Enemy");
+        EnemyCharacters = FindChild(enemies);
+        int j = 0;
+        foreach (GameObject enemy in EnemyCharacters)
+        {
+            enemy.GetComponent<Character>().myIndex = j++;
+            enemy.GetComponent<Character>().characterType = "E"; // E means enemy
+            enemy.GetComponent<Character>().SetHealthBar(HealthBarRed);
+        }
+    }
+
+    public List<GameObject> FindChild(GameObject father)
     {
         List<GameObject> childs = new List<GameObject>();
         foreach (Transform child in father.transform)

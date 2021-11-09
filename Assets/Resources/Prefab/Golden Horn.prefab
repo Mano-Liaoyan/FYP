@@ -25,6 +25,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c627b5c91a2784386a637be0c995c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myIndex: 0
+  chracterType: 
+  HealthBar: {fileID: 7249443109475746875}
+  HealthBarFill: {fileID: 6998877305468589823}
+  movingSpeed: 5
 --- !u!114 &1394018996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +418,16 @@ GameObject:
 --- !u!1 &8480873458015118276 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1147170409527850, guid: dd74320302c62ae4f887783e67500fe0, type: 3}
+  m_PrefabInstance: {fileID: 8481982485625182702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7249443109475746875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1237711687460756949, guid: dd74320302c62ae4f887783e67500fe0, type: 3}
+  m_PrefabInstance: {fileID: 8481982485625182702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6998877305468589823 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1483672136248299281, guid: dd74320302c62ae4f887783e67500fe0, type: 3}
   m_PrefabInstance: {fileID: 8481982485625182702}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8480426253442254770 stripped

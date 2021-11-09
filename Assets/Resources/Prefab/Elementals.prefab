@@ -73,7 +73,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myIndex: 0
-  chracterType: 
+  characterType: 
+  HealthBar: {fileID: 4820335323412545040}
+  HealthBarFill: {fileID: 3716600925894251911}
   movingSpeed: 5
 --- !u!114 &1102183560
 MonoBehaviour:
@@ -542,6 +544,16 @@ GameObject:
 --- !u!1 &4116923425672538053 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1497434170198644, guid: 8d210c0a4fac9564581fed8e6dfc7762, type: 3}
+  m_PrefabInstance: {fileID: 4118280053550755249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4820335323412545040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8917783174151246753, guid: 8d210c0a4fac9564581fed8e6dfc7762, type: 3}
+  m_PrefabInstance: {fileID: 4118280053550755249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3716600925894251911 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 770983301583779894, guid: 8d210c0a4fac9564581fed8e6dfc7762, type: 3}
   m_PrefabInstance: {fileID: 4118280053550755249}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4117168880630988305 stripped
