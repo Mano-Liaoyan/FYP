@@ -24,6 +24,9 @@ public class BattleDataManager : MonoBehaviour
 
     public GameObject Play_Type;
 
+    private Sprite HealthBarGreen;
+    private Sprite HealthBarRed;
+
     async void OnEnable()
     {
         FriendlyCharactersPostions = new List<Vector3>();
@@ -37,7 +40,8 @@ public class BattleDataManager : MonoBehaviour
 
     void Start()
     {
-
+        HealthBarGreen = Resources.Load<Sprite>("Images/HealthBarGreen");
+        HealthBarRed = Resources.Load<Sprite>("Images/HealthBarRed");
     }
 
     public void FindFriendlyCharacter()
@@ -48,7 +52,8 @@ public class BattleDataManager : MonoBehaviour
         foreach (GameObject friend in FriendlyCharacters)
         {
             friend.GetComponent<Character>().myIndex = i++;
-            friend.GetComponent<Character>().chracterType = "F"; // F means friendly
+            friend.GetComponent<Character>().characterType = "F"; // F means friendly
+            friend.GetComponent<Character>().SetHealthBar(HealthBarGreen);
         }
     }
 
@@ -60,7 +65,8 @@ public class BattleDataManager : MonoBehaviour
         foreach (GameObject enemy in EnemyCharacters)
         {
             enemy.GetComponent<Character>().myIndex = j++;
-            enemy.GetComponent<Character>().chracterType = "E"; // E means enemy
+            enemy.GetComponent<Character>().characterType = "E"; // E means enemy
+            enemy.GetComponent<Character>().SetHealthBar(HealthBarRed, true);
         }
     }
 

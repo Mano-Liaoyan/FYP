@@ -11,7 +11,6 @@ public class MeleeCharacter : Character
     {
         isAttacking = false;
         myPosition = transform.localPosition;
-        //EventCenter.Instance.AddEventListener<string, int>("RotateCharacter", RotateCharacter);
         EventCenter.Instance.AddEventListener<bool>("ExitAttack", SetAttackStates);
     }
 

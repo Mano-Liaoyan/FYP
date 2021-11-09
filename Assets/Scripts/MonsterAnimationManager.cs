@@ -45,19 +45,19 @@ public class MonsterAnimationManager : MonoBehaviour
         _yAxis = Input.GetAxis("Vertical");
 
         // Test Walking
-        if (_xAxis != 0 || _yAxis != 0)
-        {
-            if (_xPrev * _xAxis < 0)
-            {
-                gameObject.transform.Rotate(Vector3.up, 180);
-                _movingFlag = -_movingFlag;
-            }
+        //if (_xAxis != 0 || _yAxis != 0)
+        //{
+        //    if (_xPrev * _xAxis < 0)
+        //    {
+        //        gameObject.transform.Rotate(Vector3.up, 180);
+        //        _movingFlag = -_movingFlag;
+        //    }
 
-            _animator.SetTrigger("Move");
-            transform.Translate(new Vector3(_xAxis * _movingFlag, _yAxis, 0) * Time.deltaTime * moveSpeed);
+        //    _animator.SetTrigger("Move");
+        //    transform.Translate(new Vector3(_xAxis * _movingFlag, _yAxis, 0) * Time.deltaTime * moveSpeed);
 
-            _xPrev = _xAxis == 0 ? _xPrev : _xAxis;
-        }
+        //    _xPrev = _xAxis == 0 ? _xPrev : _xAxis;
+        //}
 
             // _animator.Play(ATTACK);
         // Test Attacking
