@@ -23,6 +23,7 @@ public class EnemyChracter : MonoBehaviour
 
     void ReceiveCharactersMessage(List<string> Characters)
     {
+        print("Inside ER");
         Character_Enemy = GameObject.Find("Character_Enemy");
         parentRectTransform = Character_Enemy.GetComponent<RectTransform>();
         parentSize = parentRectTransform.rect.size;

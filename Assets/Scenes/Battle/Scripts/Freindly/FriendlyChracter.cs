@@ -23,6 +23,7 @@ public class FriendlyChracter : MonoBehaviour
 
     void ReceiveCharactersMessage(List<string> Characters)
     {
+        print("Inside FR");
         Character_Friendly = GameObject.Find("Character_Friendly");
         parentRectTransform = Character_Friendly.GetComponent<RectTransform>();
         parentSize = parentRectTransform.rect.size;

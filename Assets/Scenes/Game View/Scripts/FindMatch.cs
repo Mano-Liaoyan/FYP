@@ -57,10 +57,10 @@ public class FindMatch : MonoBehaviour
     public IEnumerator Load(IMatchmakerMatched matched)
     {
         BattleDataManager.matched = matched;
+        SpiningImage.SetActive(false);
         InfoMessage.GetComponent<TMP_Text>().text = "Matched!";
         yield return new WaitForSeconds(2);
         PopupWindow.SetActive(false);
-        SpiningImage.SetActive(false);
         SceneLoader.LoadSceneAsync("Battle"); // Switch scene to battle scene
         yield return null;
     }

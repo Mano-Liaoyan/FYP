@@ -14,7 +14,6 @@ public class BattleDataManager : MonoBehaviour
 
     public static int currentIndex;
     public static int targetIndex;
-    public static bool isAnimating;
 
     public static List<GameObject> FriendlyCharacters;
     public static List<GameObject> EnemyCharacters;
@@ -25,12 +24,11 @@ public class BattleDataManager : MonoBehaviour
 
     public GameObject Play_Type;
 
-    async void Awake()
+    async void OnEnable()
     {
         FriendlyCharactersPostions = new List<Vector3>();
         EnemyCharactersPostions = new List<Vector3>();
         FriendlyCharactersName = new List<string>();
-        isAnimating = false;
         var match = await User.battleSocket.JoinMatchAsync(matched);
         matchId = match.Id;
         print($"matchID: {matchId}");

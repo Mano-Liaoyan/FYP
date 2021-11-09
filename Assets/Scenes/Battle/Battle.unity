@@ -3238,8 +3238,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1862982584}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadSceneByName
+        m_TargetAssemblyTypeName: LeaveMatch, Assembly-CSharp
+        m_MethodName: Leave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3296,10 +3296,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1862982579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71eaff3297b5cc645bfed326bfa07137, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e296a7b57d94ef499af1368b0fcd002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Game View
 --- !u!1 &1975980089
 GameObject:
   m_ObjectHideFlags: 0

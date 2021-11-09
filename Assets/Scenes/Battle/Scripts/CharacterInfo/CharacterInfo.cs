@@ -28,8 +28,10 @@ public class CharacterInfo : MonoBehaviour
         var res = await User.client.RpcAsync(User.session, "getCharacter");
         CharacterJson cj = JsonUtility.FromJson<CharacterJson>(res.Payload);
         var character_list = cj.characters;
+        print($"res character_list: {character_list}");
         foreach (var character in character_list)
         {
+            print($"res character: {character.monster_name},{character.level}");
             if (character.level != -1)
             {
                 FriendlyCharacters.Add(character.monster_name);
@@ -76,17 +78,27 @@ public class CharacterInfo : MonoBehaviour
             var character_list = JsonUtility.FromJson<CharacterJson>(messageJson).characters;
             foreach (var character in character_list)
             {
+                print($"enemy character: {character.monster_name},{character.level}");
                 if (character.level != -1)
                 {
                     EnemyCharacters.Add(character.monster_name);
                 }
             }
         }
-        UnityMainThreadDispatcher.Instance().Enqueue(LoadChracters());
+        try
+        {
+            UnityMainThreadDispatcher.Instance().Enqueue(LoadCharacters());
+        }
+        catch (Exception ex)
+        {
+            print("UMT Error: " + ex.ToString());
+        }
+        
     }
 
-    public IEnumerator LoadChracters()
+    public IEnumerator LoadCharacters()
     {
+        print("Inside Load Characters");
         GameObject.Find("Character_Friendly").SendMessage("ReceiveCharactersMessage", FriendlyCharacters);
         GameObject.Find("Character_Enemy").SendMessage("ReceiveCharactersMessage", EnemyCharacters);
         GameObject.Find("Character_Info").SendMessage("ReceiveCharactersMessage", FriendlyCharacters);
