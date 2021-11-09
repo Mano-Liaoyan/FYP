@@ -66,7 +66,7 @@ public class BattleDataManager : MonoBehaviour
         {
             enemy.GetComponent<Character>().myIndex = j++;
             enemy.GetComponent<Character>().characterType = "E"; // E means enemy
-            enemy.GetComponent<Character>().SetHealthBar(HealthBarRed, true);
+            enemy.GetComponent<Character>().SetHealthBar(HealthBarRed);
         }
     }
 

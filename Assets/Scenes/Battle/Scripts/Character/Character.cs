@@ -48,12 +48,11 @@ public class Character : MonoBehaviour
 
     public virtual void Attack(Vector3 endPoint, GameObject targetObj) { }
 
-    public void SetHealthBar(Sprite sp, bool isEnemy = false)
+    public void SetHealthBar(Sprite sp)
     {
+        HealthBar.transform.rotation = Quaternion.identity;
         print("Inside Set Heal Bar");
         HealthBarFill.GetComponent<Image>().sprite = sp;
-        if (isEnemy)
-            HealthBar.transform.Rotate(Vector3.up, 180);
     }
 
 
