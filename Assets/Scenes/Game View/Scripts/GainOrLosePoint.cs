@@ -76,8 +76,8 @@ public class GainOrLosePoint : MonoBehaviour
 
     public static async Task examineUpdateScoreAsync() {
         if (Time.realtimeSinceStartup - User.lastTime > 5) {
-            print("Time: " + Time.realtimeSinceStartup);
-            print("Score: " + User.score);
+            //print("Time: " + Time.realtimeSinceStartup);
+            //print("Score: " + User.score);
             User.lastTime = Time.realtimeSinceStartup;
         
             try {

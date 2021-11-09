@@ -47,6 +47,7 @@ public class LoginToServer : MonoBehaviour
         try
         {
             User.session = await _client.AuthenticateEmailAsync(username, pwd);
+            await _client.UpdateAccountAsync(User.session, username);
             User.client = _client;
             Debug.Log($"New user: {User.session.Created}, {User.session}");
             // If success, switch scene to game view
