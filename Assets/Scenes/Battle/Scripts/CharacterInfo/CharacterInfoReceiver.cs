@@ -57,12 +57,12 @@ public class CharacterInfoReceiver : MonoBehaviour
         {
             // Win
             // Send RPC to server
-            LeaveMatch.Instance.WinMatch();
+            EventCenter.Instance.TriggerEventListener("WinMatch");
         }
         else if (!checkFriendlyPersistence() && checkEnemyPersistence())
         {
             // Loose
-            StartCoroutine(LeaveMatch.Instance.LooseMatch());
+            EventCenter.Instance.TriggerEventListener("LooseMatch");
         }
 
     }

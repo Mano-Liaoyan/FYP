@@ -85,9 +85,18 @@ public class Character : MonoBehaviour
     protected void Dead()
     {
         health = 0f;
-        BattleDataManager.EnemyCharacterPersistance[myIndex] = false;
-        if (characterType.Equals("F")) // If it is a friendly character died
+
+        if (characterType.Equals("F"))// If it is a friendly character died
+        {
+            BattleDataManager.FriendlyCharacterPersistance[myIndex] = false;
             EventCenter.Instance.TriggerEventListener("DisableSlot", myIndex);
+        }
+
+        else if (characterType.Equals("E"))
+        {
+            BattleDataManager.EnemyCharacterPersistance[myIndex] = false;
+        }
+
         StartCoroutine(DestorySelf());
     }
 

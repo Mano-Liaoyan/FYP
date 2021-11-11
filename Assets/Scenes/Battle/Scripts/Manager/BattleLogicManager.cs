@@ -79,7 +79,7 @@ public class BattleLogicManager : MonoBehaviour
         string messageJson = System.Text.Encoding.UTF8.GetString(matchState.State);
         if (matchState.OpCode == 103) // 103 means your opponent is running away
         {
-            UnityMainThreadDispatcher.Instance().Enqueue(() => LeaveMatch.Instance.WinMatch());
+            UnityMainThreadDispatcher.Instance().Enqueue(() => EventCenter.Instance.TriggerEventListener("WinMatch"));
         }
     }
 
@@ -90,7 +90,7 @@ public class BattleMessage
     public int original_id;
     public int target_id;
     public float real_damage;
-    private float default_damage = 100f;
+    private float default_damage = 300f;
 
     public BattleMessage(int oid, int tid, int original_level, float buffRate)
     {

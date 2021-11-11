@@ -5,8 +5,6 @@ using TMPro;
 
 public class LeaveMatch : MonoBehaviour
 {
-    public static LeaveMatch Instance { get; private set; }
-
     public GameObject popupInfo;
     public GameObject popupTextTitle;
     public GameObject popupTextBody;
@@ -15,6 +13,8 @@ public class LeaveMatch : MonoBehaviour
 
     void Start()
     {
+        EventCenter.Instance.AddEventListener("WinMatch", WinMatch);
+        EventCenter.Instance.AddEventListener("LooseMatch", LooseMatch);
     }
     public async void Leave()
     {
@@ -39,16 +39,19 @@ public class LeaveMatch : MonoBehaviour
     {
         await User.client.RpcAsync(User.session, "matchWin");
         popupCancel.SetActive(false);
+        popupConfirm.SetActive(false);
         PopupMessage("Win", "Congradulations!");
-        Invoke(nameof(Leave), 2);
+        popupInfo.SetActive(true); 
+        Invoke("Leave", 2);
     }
 
-    public IEnumerator LooseMatch()
+    public void LooseMatch()
     {
         popupCancel.SetActive(false);
+        popupConfirm.SetActive(false);
         PopupMessage("Loose", "Keep on going!");
-        yield return new WaitForSeconds(2);
-        Leave();
+        popupInfo.SetActive(true);
+        Invoke("Leave", 2);
     }
 
     public async void Escape()
@@ -56,6 +59,7 @@ public class LeaveMatch : MonoBehaviour
         await User.battleSocket.SendMatchStateAsync(BattleDataManager.matchId, 103, "");
         popupCancel.SetActive(false);
         PopupMessage("Loose", "Keep on going!");
+        popupInfo.SetActive(true);
         Leave();
     }
 
