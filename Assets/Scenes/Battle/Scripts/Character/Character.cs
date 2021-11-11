@@ -10,7 +10,9 @@ public class Character : MonoBehaviour
     public string characterType;
     public int level;
     public float health;
+    public float buffRate;
     private float currentHealth;
+
     [SerializeField]
     private GameObject HealthBar;
     [SerializeField]
@@ -21,12 +23,13 @@ public class Character : MonoBehaviour
 
     void Start()
     {
+        buffRate = 1.0f;
     }
 
-    public void GetHurt()
+    public void GetHurt(float damage)
     {
         gameObject.GetComponent<Animator>().Play("Hurt");
-        StartCoroutine(SubtracHealth(300));
+        StartCoroutine(SubtracHealth(damage));
     }
 
     protected IEnumerator IEMoveCharacter(Vector3 startPoint, Vector3 endPoint, float offset = 0f)
@@ -48,13 +51,12 @@ public class Character : MonoBehaviour
         HealthBar.transform.Rotate(Vector3.up, 180);
     }
 
-    public virtual void Attack(Vector3 endPoint, GameObject targetObj) { }
+    public virtual void Attack(Vector3 endPoint, GameObject targetObj, float damage) { }
 
     public void SetHealthBar(Sprite sp)
     {
         HealthBar.transform.rotation = Quaternion.identity;
         HealthBar.GetComponent<Slider>().value = 1.0f; // Set the default health to 100%
-        print("Inside Set Heal Bar");
         HealthBarFill.GetComponent<Image>().sprite = sp;
     }
 
@@ -73,7 +75,6 @@ public class Character : MonoBehaviour
         while (currentHealth - temp < deltaHealth)
         {
             HealthBar.GetComponent<Slider>().value = temp-- / health;
-            print($"Slider Value: {HealthBar.GetComponent<Slider>().value}");
             yield return new WaitForSeconds(timer -= 0.001f);
         }
         currentHealth -= deltaHealth;
@@ -93,7 +94,8 @@ public class Character : MonoBehaviour
     protected IEnumerator DestorySelf()
     {
         gameObject.GetComponent<Animator>().Play("Smoke");
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(1);
+        gameObject.SetActive(false);
         gameObject.Destroy();
     }
 

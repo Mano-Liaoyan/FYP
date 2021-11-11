@@ -8,8 +8,6 @@ public class BattleLogicManager : MonoBehaviour
     public static Vector3 EndPoint;
     public float speed = 15.0f;
 
-    private Vector3 OriginalCharacterPosition = new Vector3(-1, -1, -1);
-
     // Start is called before the first frame update  
     void Start()
     {
@@ -36,10 +34,13 @@ public class BattleLogicManager : MonoBehaviour
         BattleMessage bm = null;
         for (int i = 0; i < BattleDataManager.FriendlyCharacters.Count; i++)
         {
-            if (BattleDataManager.FriendlyCharacters[i].name.Contains(character))
+            var currentCharacter = BattleDataManager.FriendlyCharacters[i];
+            if (currentCharacter.name.Contains(character))
             {
-                BattleDataManager.FriendlyCharacters[i].GetComponent<Character>().Attack(EndPoint, targetObj);
-                bm = new BattleMessage(i, randomIdx, BattleDataManager.FriendlyCharacters[i].GetComponent<Character>().level, 0);
+                var comp = currentCharacter.GetComponent<Character>();
+                bm = new BattleMessage(i, randomIdx, comp.level, comp.buffRate);
+                comp.Attack(EndPoint, targetObj, bm.real_damage);
+
             }
         }
         // Send infos to another client
@@ -49,12 +50,12 @@ public class BattleLogicManager : MonoBehaviour
         await User.battleSocket.SendMatchStateAsync(BattleDataManager.matchId, opCode, json);
     }
 
-    public static IEnumerator UpdateEnemyMovement(int oid, int tid)
+    public static IEnumerator UpdateEnemyMovement(int oid, int tid, BattleMessage bm)
     {
         EndPoint = BattleDataManager.FriendlyCharactersPostions[tid];
         EndPoint.z = 0;
         GameObject targetObj = BattleDataManager.FriendlyCharacters[tid];
-        BattleDataManager.EnemyCharacters[oid].GetComponent<Character>().Attack(EndPoint, targetObj);
+        BattleDataManager.EnemyCharacters[oid].GetComponent<Character>().Attack(EndPoint, targetObj, bm.real_damage);
         yield return null;
     }
 
@@ -64,8 +65,8 @@ public class BattleLogicManager : MonoBehaviour
         if (matchState.OpCode == 102) // 102 means send battle message: A hits B
         {
             var msg = JsonUtility.FromJson<BattleMessage>(messageJson);
-            print($"msg:{msg.original_id},{msg.target_id}");
-            UnityMainThreadDispatcher.Instance().Enqueue(UpdateEnemyMovement(msg.original_id, msg.target_id));
+            print($"msg:{msg.original_id},{msg.target_id},{msg.real_damage}");
+            UnityMainThreadDispatcher.Instance().Enqueue(UpdateEnemyMovement(msg.original_id, msg.target_id, msg));
         }
     }
 
