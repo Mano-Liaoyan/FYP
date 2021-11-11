@@ -21,20 +21,22 @@ public class EnemyChracter : MonoBehaviour
 
     }
 
-    void ReceiveCharactersMessage(List<string> Characters)
+    void ReceiveCharactersMessage(List<CharacterData> Characters)
     {
         print("Inside ER");
         Character_Enemy = GameObject.Find("Character_Enemy");
         parentRectTransform = Character_Enemy.GetComponent<RectTransform>();
         parentSize = parentRectTransform.rect.size;
         characterLength = Characters.Count;
-        foreach (string character in Characters)
+        foreach (CharacterData character in Characters)
         {
-            GameObject NewCharacter = (GameObject)Instantiate(Resources.Load($"Prefab/{character}"), transform.position, Quaternion.identity);
+            GameObject NewCharacter = (GameObject)Instantiate(Resources.Load($"Prefab/{character.monster_name}"), transform.position, Quaternion.identity);
             NewCharacter.transform.SetParent(Character_Enemy.transform, false);
             int index = Characters.IndexOf(character);
             CalcPostion(NewCharacter, index);
-        }        
+        }
+        EventCenter.Instance.TriggerEventListener("FindEnemyCharacter", Characters);
+        //GameObject.Find("GameManager").SendMessage("FindEnemyCharacter", Characters);
     }
 
     void CalcPostion(GameObject obj, int index)
@@ -62,6 +64,5 @@ public class EnemyChracter : MonoBehaviour
         obj.transform.localPosition = new Vector3(x, intervel * (y * 0.4f) - 80, 0);
         obj.transform.localRotation = new Quaternion(0, 180, 0, 0);
         BattleDataManager.EnemyCharactersPostions.Insert(index, obj.transform.localPosition);
-        GameObject.Find("GameManager").SendMessage("FindEnemyCharacter");
     }
 }

@@ -42,28 +42,35 @@ public class BattleDataManager : MonoBehaviour
     {
         HealthBarGreen = Resources.Load<Sprite>("Images/HealthBarGreen");
         HealthBarRed = Resources.Load<Sprite>("Images/HealthBarRed");
+        EventCenter.Instance.AddEventListener<List<CharacterData>>("FindEnemyCharacter", FindEnemyCharacter);
+        EventCenter.Instance.AddEventListener<List<CharacterData>>("FindFriendlyCharacter", FindFriendlyCharacter);
     }
 
-    public void FindFriendlyCharacter()
+    public void FindFriendlyCharacter(List<CharacterData> Characters)
     {
         GameObject friends = GameObject.Find("Character_Friendly");
         FriendlyCharacters = FindChild(friends);
         int i = 0;
         foreach (GameObject friend in FriendlyCharacters)
         {
+            friend.GetComponent<Character>().level = Characters[i].level;
+            friend.GetComponent<Character>().health = Characters[i].health;
             friend.GetComponent<Character>().myIndex = i++;
             friend.GetComponent<Character>().characterType = "F"; // F means friendly
             friend.GetComponent<Character>().SetHealthBar(HealthBarGreen);
         }
     }
 
-    public void FindEnemyCharacter()
+    public void FindEnemyCharacter(List<CharacterData> Characters)
     {
+        print($"OBJJJJJJJ: {Characters}");
         GameObject enemies = GameObject.Find("Character_Enemy");
         EnemyCharacters = FindChild(enemies);
         int j = 0;
         foreach (GameObject enemy in EnemyCharacters)
         {
+            enemy.GetComponent<Character>().level = Characters[j].level;
+            enemy.GetComponent<Character>().health = Characters[j].health;
             enemy.GetComponent<Character>().myIndex = j++;
             enemy.GetComponent<Character>().characterType = "E"; // E means enemy
             enemy.GetComponent<Character>().SetHealthBar(HealthBarRed);

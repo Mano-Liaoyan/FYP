@@ -39,7 +39,7 @@ public class BattleLogicManager : MonoBehaviour
             if (BattleDataManager.FriendlyCharacters[i].name.Contains(character))
             {
                 BattleDataManager.FriendlyCharacters[i].GetComponent<Character>().Attack(EndPoint, targetObj);
-                bm = new BattleMessage(i, randomIdx);
+                bm = new BattleMessage(i, randomIdx, BattleDataManager.FriendlyCharacters[i].GetComponent<Character>().level, 0);
             }
         }
         // Send infos to another client
@@ -75,10 +75,13 @@ public class BattleMessage
 {
     public int original_id;
     public int target_id;
+    public float real_damage;
+    private float default_damage = 100f;
 
-    public BattleMessage(int oid, int tid)
+    public BattleMessage(int oid, int tid, int original_level, float buffRate)
     {
         original_id = oid;
         target_id = tid;
+        real_damage = default_damage * (1 + buffRate + original_level * 0.1f);
     }
 }

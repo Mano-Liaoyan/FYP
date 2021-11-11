@@ -8,7 +8,8 @@ public class Character : MonoBehaviour
 {
     public int myIndex;
     public string characterType;
-    private int level;
+    public int level;
+    public float health;
     [SerializeField]
     private GameObject HealthBar;
     [SerializeField]
@@ -19,12 +20,12 @@ public class Character : MonoBehaviour
 
     void Start()
     {
-        EventCenter.Instance.AddEventListener("GetHurt", GetHurt);
     }
 
     public void GetHurt()
     {
         gameObject.GetComponent<Animator>().Play("Hurt");
+        StartCoroutine(SubtracHealth(100));
     }
 
     protected IEnumerator IEMoveCharacter(Vector3 startPoint, Vector3 endPoint, float offset = 0f)
@@ -51,8 +52,28 @@ public class Character : MonoBehaviour
     public void SetHealthBar(Sprite sp)
     {
         HealthBar.transform.rotation = Quaternion.identity;
+        HealthBar.GetComponent<Slider>().value = 1.0f; // Set the default health to 100%
         print("Inside Set Heal Bar");
         HealthBarFill.GetComponent<Image>().sprite = sp;
+    }
+
+    public IEnumerator SubtracHealth(float deltaHealth)
+    {
+        print($"Original Health:{health}");
+        var temp = health;
+        while (health - temp < deltaHealth)
+        {
+            HealthBar.GetComponent<Slider>().value = temp-- / health;
+            print($"Slider Value: {HealthBar.GetComponent<Slider>().value}");
+            yield return new WaitForSeconds(0.01f);
+        }
+        health -= deltaHealth;
+    }
+
+    protected void Dead()
+    {
+        health = 0f;
+        gameObject.Destroy();
     }
 
 

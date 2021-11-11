@@ -21,23 +21,25 @@ public class FriendlyChracter : MonoBehaviour
 
     }
 
-    void ReceiveCharactersMessage(List<string> Characters)
+    void ReceiveCharactersMessage(List<CharacterData> Characters)
     {
         print("Inside FR");
         Character_Friendly = GameObject.Find("Character_Friendly");
         parentRectTransform = Character_Friendly.GetComponent<RectTransform>();
         parentSize = parentRectTransform.rect.size;
         characterLength = Characters.Count;
-        foreach (string character in Characters)
+        foreach (CharacterData character in Characters)
         {            
-            GameObject NewCharacter = (GameObject)Instantiate(Resources.Load($"Prefab/{character}"), transform.position, Quaternion.identity);
+            GameObject NewCharacter = (GameObject)Instantiate(Resources.Load($"Prefab/{character.monster_name}"), transform.position, Quaternion.identity);
             // Set worldPostionStays to false
             // See https://blog.csdn.net/qq_42672770/article/details/109180796
             NewCharacter.transform.SetParent(Character_Friendly.transform, false);
             int index = Characters.IndexOf(character);
-            BattleDataManager.FriendlyCharactersName.Insert(index, character);
+            BattleDataManager.FriendlyCharactersName.Insert(index, character.monster_name);
             CalcPostion(NewCharacter, index);
         }
+        //GameObject.Find("GameManager").SendMessage("FindFriendlyCharacter");
+        EventCenter.Instance.TriggerEventListener("FindFriendlyCharacter", Characters);
     }
 
     public bool isFinsish()
@@ -71,6 +73,5 @@ public class FriendlyChracter : MonoBehaviour
         BattleDataManager.FriendlyCharactersPostions.Insert(index, obj.transform.localPosition);
         isFinishLoad = true;
         //print("load finish");
-        GameObject.Find("GameManager").SendMessage("FindFriendlyCharacter");
     }
 }

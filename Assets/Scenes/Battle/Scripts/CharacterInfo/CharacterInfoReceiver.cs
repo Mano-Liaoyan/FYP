@@ -22,21 +22,21 @@ public class CharacterInfoReceiver : MonoBehaviour
 
     }
 
-    void ReceiveCharactersMessage(List<string> Characters)
+    void ReceiveCharactersMessage(List<CharacterData> Characters)
     {
         print("Inside slots info");
         Character_Info = GameObject.Find("Character_Info");
         parentRectTransform = Character_Info.GetComponent<RectTransform>();
         parentSize = parentRectTransform.rect.size;
         characterLength = Characters.Count;
-        foreach (string character in Characters)
+        foreach (CharacterData character in Characters)
         {
             GameObject NewSlot = (GameObject)Instantiate(Resources.Load($"Prefab/Slot"), transform.position, Quaternion.identity);
             NewSlot.transform.SetParent(Character_Info.transform, false);
             Vector3 temp = NewSlot.transform.localPosition;
             temp.z = 0;
             NewSlot.transform.localPosition = temp;
-            NewSlot.GetComponent<CharacterSlotInfos>().SetCharacter = character;
+            NewSlot.GetComponent<CharacterSlotInfos>().SetCharacter = character.monster_name;
 
             int index = Characters.IndexOf(character);
             NewSlot.GetComponent<CharacterSlotInfos>().SetCharacterIdx = index;

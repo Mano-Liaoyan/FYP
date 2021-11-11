@@ -10,17 +10,17 @@ using UnityEngine;
 /// </summary>
 public class CharacterInfo : MonoBehaviour
 {
-    private List<string> FriendlyCharacters;
+    private List<CharacterData> FriendlyCharacters;
     /*[SerializeField] */
-    private List<string> EnemyCharacters;
+    private List<CharacterData> EnemyCharacters;
 
     // Start is called before the first frame update
     async void OnEnable()
     {
         print($"Inside OnEnable!, User.battleSocket status:{User.battleSocket}");
         User.battleSocket.ReceivedMatchState += ReceiveEnemyChracterInfo;
-        FriendlyCharacters = new List<string>();
-        EnemyCharacters = new List<string>();
+        FriendlyCharacters = new List<CharacterData>();
+        EnemyCharacters = new List<CharacterData>();
         await FetchUserCharactersAsync();
     }
     public async Task FetchUserCharactersAsync()
@@ -31,10 +31,10 @@ public class CharacterInfo : MonoBehaviour
         print($"res character_list: {character_list}");
         foreach (var character in character_list)
         {
-            print($"res character: {character.monster_name},{character.level}");
+            print($"res character: {character.monster_name},{character.level},{character.health}");
             if (character.level != -1)
             {
-                FriendlyCharacters.Add(character.monster_name);
+                FriendlyCharacters.Add(character);
             }
         }
         // Send infos to another client
@@ -78,10 +78,10 @@ public class CharacterInfo : MonoBehaviour
             var character_list = JsonUtility.FromJson<CharacterJson>(messageJson).characters;
             foreach (var character in character_list)
             {
-                print($"enemy character: {character.monster_name},{character.level}");
+                print($"enemy character: {character.monster_name},{character.level},{character.health}");
                 if (character.level != -1)
                 {
-                    EnemyCharacters.Add(character.monster_name);
+                    EnemyCharacters.Add(character);
                 }
             }
         }
@@ -93,7 +93,7 @@ public class CharacterInfo : MonoBehaviour
         {
             print("UMT Error: " + ex.ToString());
         }
-        
+
     }
 
     public IEnumerator LoadCharacters()
@@ -110,6 +110,7 @@ public class CharacterData
 {
     public string monster_name;
     public int level;
+    public float health;
 }
 
 [Serializable]
