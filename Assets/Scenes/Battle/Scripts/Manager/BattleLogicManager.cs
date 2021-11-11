@@ -12,6 +12,7 @@ public class BattleLogicManager : MonoBehaviour
     void Start()
     {
         User.battleSocket.ReceivedMatchState += ReceiveEnemyChracterInfo;
+        User.battleSocket.ReceivedMatchState += ReceiveEscapeSignal;
     }
 
     // Update is called once per frame
@@ -23,6 +24,8 @@ public class BattleLogicManager : MonoBehaviour
     void OnDestroy()
     {
         User.battleSocket.ReceivedMatchState -= ReceiveEnemyChracterInfo;
+        User.battleSocket.ReceivedMatchState -= ReceiveEscapeSignal;
+
     }
 
 
@@ -68,6 +71,15 @@ public class BattleLogicManager : MonoBehaviour
             var msg = JsonUtility.FromJson<BattleMessage>(messageJson);
             print($"msg:{msg.original_id},{msg.target_id},{msg.real_damage}");
             UnityMainThreadDispatcher.Instance().Enqueue(UpdateEnemyMovement(msg.original_id, msg.target_id, msg));
+        }
+    }
+
+    public void ReceiveEscapeSignal(IMatchState matchState)
+    {
+        string messageJson = System.Text.Encoding.UTF8.GetString(matchState.State);
+        if (matchState.OpCode == 103) // 103 means your opponent is running away
+        {
+            UnityMainThreadDispatcher.Instance().Enqueue(() => LeaveMatch.Instance.WinMatch());
         }
     }
 

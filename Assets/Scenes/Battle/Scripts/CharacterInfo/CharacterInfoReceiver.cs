@@ -6,7 +6,6 @@ public class CharacterInfoReceiver : MonoBehaviour
 {
     private GameObject Character_Info;
     private RectTransform parentRectTransform;
-    private Vector2 parentSize;
     private int characterLength;
 
     // Start is called before the first frame update
@@ -27,7 +26,6 @@ public class CharacterInfoReceiver : MonoBehaviour
         print("Inside slots info");
         Character_Info = GameObject.Find("Character_Info");
         parentRectTransform = Character_Info.GetComponent<RectTransform>();
-        parentSize = parentRectTransform.rect.size;
         characterLength = Characters.Count;
         foreach (CharacterData character in Characters)
         {
@@ -50,6 +48,56 @@ public class CharacterInfoReceiver : MonoBehaviour
 
     void ActiveSlots()
     {
-        gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        print("INSIDE ACTIVE SLOTS");
+        if (checkFriendlyPersistence() && checkEnemyPersistence())
+        {
+            gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+        else if (checkFriendlyPersistence() && !checkEnemyPersistence())
+        {
+            // Win
+            // Send RPC to server
+            LeaveMatch.Instance.WinMatch();
+        }
+        else if (!checkFriendlyPersistence() && checkEnemyPersistence())
+        {
+            // Loose
+            StartCoroutine(LeaveMatch.Instance.LooseMatch());
+        }
+
     }
+
+    /// <summary>
+    /// Find if all the friend is still persist
+    /// </summary>
+    /// <returns>true, if there is at least one friend exist</returns>
+    bool checkFriendlyPersistence()
+    {
+        foreach (var friendly_persistence in BattleDataManager.FriendlyCharacterPersistance)
+        {
+            if (friendly_persistence)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    /// <summary>
+    /// Find if all the enemy is still persist
+    /// </summary>
+    /// <returns>true, if there is at least one enemy exist</returns>
+    bool checkEnemyPersistence()
+    {
+        foreach (var enemy_persistence in BattleDataManager.EnemyCharacterPersistance)
+        {
+            if (enemy_persistence)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
