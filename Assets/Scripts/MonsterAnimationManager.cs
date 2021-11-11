@@ -16,7 +16,7 @@ public class MonsterAnimationManager : MonoBehaviour
     private float _xAxis;
     private float _yAxis;
     private float _xPrev;
-    private int _movingFlag = 1;
+    //private int _movingFlag = 1;
 
     private const string IDLE = "Idle";
     private const string HURT = "Hurt";

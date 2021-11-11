@@ -55,6 +55,7 @@ public class BattleLogicManager : MonoBehaviour
         EndPoint = BattleDataManager.FriendlyCharactersPostions[tid];
         EndPoint.z = 0;
         GameObject targetObj = BattleDataManager.FriendlyCharacters[tid];
+        UnityMainThreadDispatcher.Instance().Enqueue(() => EventCenter.Instance.TriggerEventListener("DisableSlots"));
         BattleDataManager.EnemyCharacters[oid].GetComponent<Character>().Attack(EndPoint, targetObj, bm.real_damage);
         yield return null;
     }
