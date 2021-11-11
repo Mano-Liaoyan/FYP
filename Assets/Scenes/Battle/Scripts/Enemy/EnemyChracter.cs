@@ -33,6 +33,7 @@ public class EnemyChracter : MonoBehaviour
             GameObject NewCharacter = (GameObject)Instantiate(Resources.Load($"Prefab/{character.monster_name}"), transform.position, Quaternion.identity);
             NewCharacter.transform.SetParent(Character_Enemy.transform, false);
             int index = Characters.IndexOf(character);
+            BattleDataManager.EnemyCharacterPersistance.Add(true);
             CalcPostion(NewCharacter, index);
         }
         EventCenter.Instance.TriggerEventListener("FindEnemyCharacter", Characters);

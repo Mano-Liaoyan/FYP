@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
     public string characterType;
     public int level;
     public float health;
+    private float currentHealth;
     [SerializeField]
     private GameObject HealthBar;
     [SerializeField]
@@ -25,7 +26,7 @@ public class Character : MonoBehaviour
     public void GetHurt()
     {
         gameObject.GetComponent<Animator>().Play("Hurt");
-        StartCoroutine(SubtracHealth(100));
+        StartCoroutine(SubtracHealth(300));
     }
 
     protected IEnumerator IEMoveCharacter(Vector3 startPoint, Vector3 endPoint, float offset = 0f)
@@ -59,22 +60,43 @@ public class Character : MonoBehaviour
 
     public IEnumerator SubtracHealth(float deltaHealth)
     {
+        float temp;
+        if (currentHealth == 0f)
+        {
+            currentHealth = health;
+        }
+
+        temp = currentHealth;
+
         print($"Original Health:{health}");
-        var temp = health;
-        while (health - temp < deltaHealth)
+        float timer = 0.01f;
+        while (currentHealth - temp < deltaHealth)
         {
             HealthBar.GetComponent<Slider>().value = temp-- / health;
             print($"Slider Value: {HealthBar.GetComponent<Slider>().value}");
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(timer -= 0.001f);
         }
-        health -= deltaHealth;
+        currentHealth -= deltaHealth;
+
+        if (currentHealth <= 0) { Dead(); }
     }
 
     protected void Dead()
     {
         health = 0f;
+        BattleDataManager.EnemyCharacterPersistance[myIndex] = false;
+        if (characterType.Equals("F")) // If it is a friendly character died
+            EventCenter.Instance.TriggerEventListener("DisableSlot", myIndex);
+        StartCoroutine(DestorySelf());
+    }
+
+    protected IEnumerator DestorySelf()
+    {
+        gameObject.GetComponent<Animator>().Play("Smoke");
+        yield return new WaitForSeconds(0.6f);
         gameObject.Destroy();
     }
+
 
 
 }

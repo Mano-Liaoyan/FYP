@@ -28,6 +28,7 @@ MonoBehaviour:
   myIndex: 0
   characterType: 
   level: 0
+  health: 0
   HealthBar: {fileID: 5389639467220781149}
   HealthBarFill: {fileID: 3066591735496666761}
   movingSpeed: 5

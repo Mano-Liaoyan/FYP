@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class BattleDataManager : MonoBehaviour
 {
-    public static List<string> FriendlyCharactersName;
-    public static List<string> EnemyCharactersName;
+    public static List<bool> FriendlyCharacterPersistance;
+    public static List<bool> EnemyCharacterPersistance;
 
     public static List<Vector3> FriendlyCharactersPostions;
     public static List<Vector3> EnemyCharactersPostions;
@@ -31,7 +31,8 @@ public class BattleDataManager : MonoBehaviour
     {
         FriendlyCharactersPostions = new List<Vector3>();
         EnemyCharactersPostions = new List<Vector3>();
-        FriendlyCharactersName = new List<string>();
+        FriendlyCharacterPersistance = new List<bool>();
+        EnemyCharacterPersistance = new List<bool>();
         var match = await User.battleSocket.JoinMatchAsync(matched);
         matchId = match.Id;
         print($"matchID: {matchId}");
@@ -63,7 +64,6 @@ public class BattleDataManager : MonoBehaviour
 
     public void FindEnemyCharacter(List<CharacterData> Characters)
     {
-        print($"OBJJJJJJJ: {Characters}");
         GameObject enemies = GameObject.Find("Character_Enemy");
         EnemyCharacters = FindChild(enemies);
         int j = 0;

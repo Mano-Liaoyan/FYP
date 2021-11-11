@@ -37,7 +37,7 @@ public class CharacterInfoReceiver : MonoBehaviour
             temp.z = 0;
             NewSlot.transform.localPosition = temp;
             NewSlot.GetComponent<CharacterSlotInfos>().SetCharacter = character.monster_name;
-
+            NewSlot.GetComponent<CharacterSlotInfos>().InitSlotInfos(character.level);
             int index = Characters.IndexOf(character);
             NewSlot.GetComponent<CharacterSlotInfos>().SetCharacterIdx = index;
         }

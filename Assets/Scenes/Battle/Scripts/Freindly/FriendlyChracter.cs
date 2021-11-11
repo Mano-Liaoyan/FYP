@@ -35,7 +35,7 @@ public class FriendlyChracter : MonoBehaviour
             // See https://blog.csdn.net/qq_42672770/article/details/109180796
             NewCharacter.transform.SetParent(Character_Friendly.transform, false);
             int index = Characters.IndexOf(character);
-            BattleDataManager.FriendlyCharactersName.Insert(index, character.monster_name);
+            BattleDataManager.FriendlyCharacterPersistance.Add(true);
             CalcPostion(NewCharacter, index);
         }
         //GameObject.Find("GameManager").SendMessage("FindFriendlyCharacter");

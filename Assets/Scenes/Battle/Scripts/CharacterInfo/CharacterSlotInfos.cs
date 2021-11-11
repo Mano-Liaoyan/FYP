@@ -9,9 +9,10 @@ public class CharacterSlotInfos : MonoBehaviour
 {
     [SerializeField] private string Character;
     [SerializeField] private int CharacterIdx;
-    [SerializeField, Min(1)] private int Level;
-    [SerializeField, Range(0, 1)] private float Health;
-    [SerializeField, Range(0, 1)] private float Mana;
+    private int Level;
+    [SerializeField] private GameObject BackGlow;
+    [SerializeField] private GameObject BottomGlow;
+    [SerializeField] private GameObject Frame;
 
     public string SetCharacter { set { Character = value; UpdateMasks(); } }
     public int SetCharacterIdx { set { CharacterIdx = value; } }
@@ -19,17 +20,12 @@ public class CharacterSlotInfos : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.Health = Random.Range(0f, 1);
-        this.Mana = Random.Range(0f, 1);
-        this.Level = Random.Range(1, 100);
+        EventCenter.Instance.AddEventListener<int>("DisableSlot", DisableSlot);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Find("Slider/Slider_Health").GetComponent<Slider>().value = this.Health;
-        transform.Find("Slider/Slider_Mana").GetComponent<Slider>().value = this.Mana;
-        transform.Find("Level/Text_Lv").GetComponent<TMP_Text>().text = this.Level.ToString();
     }
 
     void UpdateMasks()
@@ -42,6 +38,36 @@ public class CharacterSlotInfos : MonoBehaviour
     {
         EventCenter.Instance.TriggerEventListener("DisableSlots");
         BattleDataManager.currentIndex = CharacterIdx;
-        BattleLogicManager.UpdateFriendlyMovement(Character, Random.Range(0, BattleDataManager.EnemyCharactersPostions.Count));
+        int target_index = -1;
+        while (true)
+        {
+            target_index = Random.Range(0, BattleDataManager.EnemyCharactersPostions.Count);
+            if (!BattleDataManager.EnemyCharacterPersistance[target_index])// if the enemy does not exist
+                target_index = -1;
+            if (target_index != -1) break;
+        }
+        BattleLogicManager.UpdateFriendlyMovement(Character, target_index);
     }
+
+    public void InitSlotInfos(int level)
+    {
+        this.Level = level;
+        transform.Find("Level/Text_Lv").GetComponent<TMP_Text>().text = this.Level.ToString();
+    }
+
+    public void DisableSlot(int idx)
+    {
+        print($"Inside Disable Slot {idx}");
+        if (CharacterIdx == idx)
+        {
+            gameObject.GetComponent<Image>().color = Color.gray;
+            BackGlow.GetComponent<Image>().color = Color.gray;
+            BottomGlow.GetComponent<Image>().color = Color.gray;
+            Frame.GetComponent<Image>().color = Color.gray;
+            gameObject.GetComponent<Button>().interactable = false;
+        }
+    }
+
+
+
 }
