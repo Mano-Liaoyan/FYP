@@ -32,6 +32,11 @@ public class Character : MonoBehaviour
         StartCoroutine(SubtracHealth(damage));
     }
 
+    public void GetHurtWithoutDamage()
+    {
+        gameObject.GetComponent<Animator>().Play("Hurt");
+    }
+
     protected IEnumerator IEMoveCharacter(Vector3 startPoint, Vector3 endPoint, float offset = 0f)
     {
         Vector3 currentPoint = startPoint;
