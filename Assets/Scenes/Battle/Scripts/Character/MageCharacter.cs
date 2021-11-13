@@ -24,8 +24,8 @@ public class MageCharacter : Character
         GameObject skill = (GameObject)Instantiate(Resources.Load($"Prefab/VFX/Modify Magic Ice"),
             transform.position + z_offset, rotation);
         yield return new WaitForSeconds(2f);
-        EventCenter.Instance.TriggerEventListener("ActiveSlots");
         Destroy(skill);
+        EventCenter.Instance.TriggerEventListener("ActiveSlots");
 
     }
 

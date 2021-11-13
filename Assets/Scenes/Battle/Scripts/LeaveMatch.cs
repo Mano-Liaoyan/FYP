@@ -15,6 +15,7 @@ public class LeaveMatch : MonoBehaviour
     {
         EventCenter.Instance.AddEventListener("WinMatch", WinMatch);
         EventCenter.Instance.AddEventListener("LooseMatch", LooseMatch);
+        EventCenter.Instance.AddEventListener("LoadPopInfo", LoadPopInfo);
     }
     public async void Leave()
     {
@@ -61,6 +62,11 @@ public class LeaveMatch : MonoBehaviour
         PopupMessage("Loose", "Keep on going!");
         popupInfo.SetActive(true);
         Leave();
+    }
+
+    public void LoadPopInfo()
+    {
+
     }
 
 }

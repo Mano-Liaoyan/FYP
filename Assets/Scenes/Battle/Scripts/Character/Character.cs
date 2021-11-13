@@ -75,6 +75,10 @@ public class Character : MonoBehaviour
         while (currentHealth - temp < deltaHealth)
         {
             HealthBar.GetComponent<Slider>().value = temp-- / health;
+            if (temp <= 0)
+            {
+                break;
+            }
             yield return new WaitForSeconds(timer -= 0.001f);
         }
         currentHealth -= deltaHealth;
