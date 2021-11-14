@@ -38,6 +38,7 @@ public class BattleLogicManager : MonoBehaviour
         for (int i = 0; i < BattleDataManager.FriendlyCharacters.Count; i++)
         {
             var currentCharacter = BattleDataManager.FriendlyCharacters[i];
+            if (currentCharacter == null) continue;
             if (currentCharacter.name.Contains(character))
             {
                 var comp = currentCharacter.GetComponent<Character>();

@@ -24,6 +24,7 @@ public class PopInfo : MonoBehaviour
 
     public void Escape()
     {
-        EventCenter.Instance.TriggerEventListener("Escape");
+        print("CLICK ESCAPE!");
+        UnityMainThreadDispatcher.Instance().Enqueue(() => EventCenter.Instance.TriggerEventListener("Escape"));
     }
 }

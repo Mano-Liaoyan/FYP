@@ -55,7 +55,7 @@ public class LeaveMatch : MonoBehaviour
         popInfo.popupCancel.SetActive(false);
         popInfo.PopupMessage("Loose", "Keep on going!");
         popInfo.gameObject.SetActive(true);
-        Leave();
+        Invoke("Leave", 2);
     }
 
     public void LoadPopInfo()

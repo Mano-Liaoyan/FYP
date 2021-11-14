@@ -72,7 +72,7 @@ public class CharacterSlotInfos : MonoBehaviour
             BottomGlow.GetComponent<Image>().color = Color.gray;
             Frame.GetComponent<Image>().color = Color.gray;
             gameObject.GetComponent<Button>().interactable = false;
-            gameObject.GetComponent<Button>().enabled = false;
+            //gameObject.GetComponent<Button>().enabled = false;
         }
     }
 
