@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -105,9 +106,19 @@ public class Character : MonoBehaviour
 
         print($"Original Health:{health}");
         float timer = 0.01f;
+        GameObject DamageNumber = (GameObject)Instantiate(Resources.Load($"Prefab/DamageNumber"),
+            transform.position, Quaternion.identity);
+        DamageNumber.transform.SetParent(transform.parent, false);
+        var temp_position = myPosition;
+        temp_position.y += 160;
+        DamageNumber.transform.localPosition = temp_position;
+        var tmp = DamageNumber.GetComponent<TMP_Text>();
+        tmp.text = $"-{(int)deltaHealth}";
+        tmp.fontSize = 200f;
+        StartCoroutine(DamageNumberDisolve(DamageNumber, tmp));
         while (currentHealth - temp < deltaHealth)
         {
-            HealthBar.GetComponent<Slider>().value = temp-- / health;
+            HealthBar.GetComponent<Slider>().value = temp -- / health;
             if (temp <= 0)
             {
                 break;
@@ -117,6 +128,19 @@ public class Character : MonoBehaviour
         currentHealth -= deltaHealth;
 
         if (currentHealth <= 0) { Dead(); }
+    }
+
+    protected IEnumerator DamageNumberDisolve(GameObject DamageNumber, TMP_Text text)
+    {
+        while (text.fontSize > 0)
+        {
+            int x_flag = characterType.Equals("F") ? -1 : 1;
+            DamageNumber.transform.localPosition += new Vector3(x_flag * 10, 10, 0);
+            text.fontSize -= 3f;
+            text.alpha -= 0.05f;
+            yield return new WaitForSeconds(0.04f);
+        }
+        Destroy(DamageNumber);
     }
 
     protected void Dead()
@@ -152,7 +176,7 @@ public class Character : MonoBehaviour
 
     protected void RandomBuffRate()
     {
-       buffRate = UnityEngine.Random.Range(0, 1.0f);
+        buffRate = UnityEngine.Random.Range(0, 1.0f);
     }
 
 
