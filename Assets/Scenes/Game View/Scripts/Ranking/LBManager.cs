@@ -48,11 +48,12 @@ public class LBManager : MonoBehaviour
         {
             ScrollRect.transform.Find("List_Me/Text_999").GetComponent<TMP_Text>().text = r.Rank;
             ScrollRect.transform.Find("List_Me/Text_Score").GetComponent<TMP_Text>().text = r.Score;
+            ScrollRect.transform.Find("List_Me/Text_NickName").GetComponent<TMP_Text>().text = r.Username;
             Debug.LogFormat("My score: Record for '{0}' score '{1}'", r.Username, r.Score);
         }
         int counter = 0;
 
-        var result = await User.client.ListLeaderboardRecordsAsync(User.session, leaderboardId);
+        var result = await User.client.ListLeaderboardRecordsAsync(User.session, leaderboardId,null,null,9);
 
 
         foreach (var r in result.Records)
@@ -60,25 +61,23 @@ public class LBManager : MonoBehaviour
 
             print(List_me[counter]);
             List_me[counter].transform.Find("Text_Score").GetComponent<TMP_Text>().text = r.Score;
+            List_me[counter].transform.Find("Text_NickName").GetComponent<TMP_Text>().text = r.Username;
             print(List_me[counter].transform.Find("Text_Score"));
             Debug.LogFormat("Record for '{0}' score '{1}'", r.Username, r.Score);
             counter++;
         }
-        if (result.NextCursor != null)
-        {
-            result = await User.client.ListLeaderboardRecordsAsync(User.session, leaderboardId, null, null, 10, result.NextCursor);
-            //User.client.ListLeaderboardRecordsAsync()
-            foreach (var r in result.Records)
-            {
-                Debug.LogFormat("Record for '{0}' score '{1}'", r.Username, r.Score);
-                List_me[counter].transform.Find("Text_Score").GetComponent<TMP_Text>().text = r.Score;
-                print(List_me[counter].transform.Find("Text_Score"));
-                counter++;
-            }
-        }
-        for (int i = counter; i < 9; i++)
-        {
+        //if (result.NextCursor != null)
+        //{
+        //    result = await User.client.ListLeaderboardRecordsAsync(User.session, leaderboardId, null, null, 10, result.NextCursor);
+        //    //User.client.ListLeaderboardRecordsAsync()
+        //    foreach (var r in result.Records)
+        //    {
+        //        Debug.LogFormat("Record for '{0}' score '{1}'", r.Username, r.Score);
+        //        List_me[counter].transform.Find("Text_Score").GetComponent<TMP_Text>().text = r.Score;
+        //        print(List_me[counter].transform.Find("Text_Score"));
+        //        counter++;
+        //    }
+        //}
 
-        }
     }
 }
