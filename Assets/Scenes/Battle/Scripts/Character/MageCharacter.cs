@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MageCharacter : Character
@@ -14,6 +15,11 @@ public class MageCharacter : Character
 
     public override void Attack(Vector3 endPoint, GameObject targetObj, float damage)
     {
+        print($"ct: {characterType}");
+        //if (characterType.Equals("F"))
+        //    EventCenter.Instance.TriggerEventListener("ChangeLayerNameToFriendCube", "FriendCube");
+        //else if (characterType.Equals("E"))
+        //    EventCenter.Instance.TriggerEventListener("ChangeLayerNameToFriendCube", "EnemyCube");
         Vector3 endPointDirection = endPoint - myPosition;
         StartCoroutine(MageAttack(endPointDirection, targetObj, damage));
     }
@@ -29,6 +35,14 @@ public class MageCharacter : Character
         GameObject skill = (GameObject)Instantiate(Resources.Load($"Prefab/VFX/Modify Magic Ice"),
             transform.position + z_offset, rotation);
 
+        var collider = skill.GetComponent<ParticleSystem>().collision;
+
+        if (characterType.Equals("F"))
+            collider.collidesWith = 1 << 7;
+        else if (characterType.Equals("E"))
+            collider.collidesWith = 1 << 8;
+
+        skill.GetComponent<ParticleSystem>().Play();
         skill.GetComponent<MagicIceInfo>().index = myIndex;
         skill.GetComponent<MagicIceInfo>().target = targetObj;
         skill.GetComponent<MagicIceInfo>().damage = damage;

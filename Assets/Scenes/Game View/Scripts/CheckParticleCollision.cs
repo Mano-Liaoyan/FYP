@@ -10,6 +10,16 @@ public class CheckParticleCollision : MonoBehaviour
     {
         count = 0;
         EventCenter.Instance.AddEventListener("ResetParticleCount", ResetCount);
+        //EventCenter.Instance.AddEventListener<string>("ChangeLayerNameToFriendCube", ChangeLayerNameToFriendCube);
+    }
+
+    public void ChangeLayerNameToFriendCube(string objName)
+    {
+        print($"OBJ Name: {gameObject.name}");
+        if (objName.Equals(gameObject.name))
+            gameObject.layer = LayerMask.NameToLayer("FriendCube");
+        else
+            gameObject.layer = LayerMask.NameToLayer("EnemyCube");
     }
 
     private void OnParticleCollision(GameObject partical)
