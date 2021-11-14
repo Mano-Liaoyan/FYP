@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,7 @@ public class Character : MonoBehaviour
 
     void Start()
     {
-        buffRate = 1.0f;
+        buffRate = 0f;
     }
 
     public void GetHurt(float damage)
@@ -57,6 +58,33 @@ public class Character : MonoBehaviour
     }
 
     public virtual void Attack(Vector3 endPoint, GameObject targetObj, float damage) { }
+
+    public async void BuffSelf()
+    {
+        ResetBuffRate();
+        RandomBuffRate();
+        GameObject buffSkill = (GameObject)Instantiate(Resources.Load($"Prefab/VFX/Fx_Spread_Star"),
+            transform.position, Quaternion.identity);
+        buffSkill.transform.SetParent(transform.parent, false);
+        // Reverse the y coordinate
+        var temp = myPosition;
+        temp.y += 160;
+        buffSkill.transform.localPosition = temp;
+        buffSkill.transform.localScale = new Vector3(100, 100, 1);
+        // This is an enemy character
+        if (characterType.Equals("E"))
+        {
+            ParticleSystem buffPartical = buffSkill.GetComponent<ParticleSystem>();
+            ParticleSystem.MainModule buffMain = buffPartical.main;
+            buffMain.startColor = Color.red;
+            ParticleSystem starPartical = buffSkill.transform.Find("Fx_Star").GetComponent<ParticleSystem>();
+            ParticleSystem.MainModule starMain = starPartical.main;
+            starMain.startColor = Color.red;
+        }
+        await Task.Delay(TimeSpan.FromSeconds(1.5));
+        Destroy(buffSkill);
+        EventCenter.Instance.TriggerEventListener("ActiveSlots");
+    }
 
     public void SetHealthBar(Sprite sp)
     {
@@ -115,6 +143,16 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(1);
         gameObject.SetActive(false);
         gameObject.Destroy();
+    }
+
+    protected void ResetBuffRate()
+    {
+        buffRate = 0f;
+    }
+
+    protected void RandomBuffRate()
+    {
+       buffRate = UnityEngine.Random.Range(0, 1.0f);
     }
 
 

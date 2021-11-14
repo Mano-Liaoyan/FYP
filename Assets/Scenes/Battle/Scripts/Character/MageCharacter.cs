@@ -37,7 +37,7 @@ public class MageCharacter : Character
         //targetObj.GetComponent<Character>().GetHurt(damage);
         Destroy(skill);
         EventCenter.Instance.TriggerEventListener("ActiveSlots");
-
+        ResetBuffRate();
     }
 
 }

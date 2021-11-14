@@ -49,6 +49,12 @@ public class CharacterSlotInfos : MonoBehaviour
         BattleLogicManager.UpdateFriendlyMovement(Character, target_index);
     }
 
+    public void OnclickBuff()
+    {
+        EventCenter.Instance.TriggerEventListener("DisableSlots");
+        BattleLogicManager.UpdateBuff(CharacterIdx);
+    }
+
     public void InitSlotInfos(int level)
     {
         this.Level = level;

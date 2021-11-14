@@ -20,8 +20,6 @@ public class CheckParticleCollision : MonoBehaviour
 
         if (partical.tag.Equals("Bullet") && count == 0)
         {
-            print("Being hit!!");
-            print($"magicIceInfo: {magicIceInfo.index},{magicIceInfo.target},{magicIceInfo.damage}");
             count++;
             target.GetComponent<Character>().GetHurt(damage);
         }

@@ -71,6 +71,7 @@ public class CharacterInfo : MonoBehaviour
 
     public void ReceiveEnemyChracterInfo(IMatchState matchState)
     {
+        print("Received Enemy Info from server");
         User.battleSocket.ReceivedMatchState -= ReceiveEnemyChracterInfo;
         string messageJson = System.Text.Encoding.UTF8.GetString(matchState.State);
         if (matchState.OpCode == 101)
@@ -85,15 +86,7 @@ public class CharacterInfo : MonoBehaviour
                 }
             }
         }
-        try
-        {
-            UnityMainThreadDispatcher.Instance().Enqueue(LoadCharacters());
-        }
-        catch (Exception ex)
-        {
-            print("UMT Error: " + ex.ToString());
-        }
-
+        UnityMainThreadDispatcher.Instance().Enqueue(LoadCharacters());
     }
 
     public IEnumerator LoadCharacters()

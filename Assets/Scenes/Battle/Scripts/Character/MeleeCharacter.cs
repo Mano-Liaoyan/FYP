@@ -31,6 +31,7 @@ public class MeleeCharacter : Character
         yield return StartCoroutine(IEMoveCharacter(transform.localPosition, myPosition));
         RotateCharacter();
         EventCenter.Instance.TriggerEventListener("ActiveSlots");
+        ResetBuffRate();
     }
 
     private void SetAttackStates(bool state)

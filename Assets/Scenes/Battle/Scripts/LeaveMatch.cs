@@ -17,6 +17,11 @@ public class LeaveMatch : MonoBehaviour
         EventCenter.Instance.AddEventListener("LooseMatch", LooseMatch);
         EventCenter.Instance.AddEventListener("LoadPopInfo", LoadPopInfo);
     }
+
+    void OnDestroy()
+    {
+        Escape();
+    }
     public async void Leave()
     {
         await User.battleSocket.LeaveMatchAsync(BattleDataManager.matchId);

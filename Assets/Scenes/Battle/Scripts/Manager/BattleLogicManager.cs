@@ -43,7 +43,6 @@ public class BattleLogicManager : MonoBehaviour
                 var comp = currentCharacter.GetComponent<Character>();
                 bm = new BattleMessage(i, randomIdx, comp.level, comp.buffRate);
                 comp.Attack(EndPoint, targetObj, bm.real_damage);
-
             }
         }
         // Send infos to another client
@@ -63,6 +62,19 @@ public class BattleLogicManager : MonoBehaviour
         yield return null;
     }
 
+    public static async void UpdateBuff(int index)
+    {
+        var character = BattleDataManager.FriendlyCharacters[index].GetComponent<Character>();
+        character.BuffSelf();
+        var bm = new BattleMessage(index, 0, character.level, character.buffRate);
+        // Send infos to another client
+        long opCode = 104; // 104 means buff a character
+        string json = JsonUtility.ToJson(bm);
+        print($"104 json: {json}");
+        await User.battleSocket.SendMatchStateAsync(BattleDataManager.matchId, opCode, json);
+
+    }
+
     public void ReceiveEnemyChracterInfo(IMatchState matchState)
     {
         string messageJson = System.Text.Encoding.UTF8.GetString(matchState.State);
@@ -71,6 +83,12 @@ public class BattleLogicManager : MonoBehaviour
             var msg = JsonUtility.FromJson<BattleMessage>(messageJson);
             print($"msg:{msg.original_id},{msg.target_id},{msg.real_damage}");
             UnityMainThreadDispatcher.Instance().Enqueue(UpdateEnemyMovement(msg.original_id, msg.target_id, msg));
+        }
+        if (matchState.OpCode == 104) // 104 means buff a character
+        {
+            var msg = JsonUtility.FromJson<BattleMessage>(messageJson);
+            print($"msg:{msg.original_id}");
+            UnityMainThreadDispatcher.Instance().Enqueue(() => BattleDataManager.EnemyCharacters[msg.original_id].GetComponent<Character>().BuffSelf());
         }
     }
 
