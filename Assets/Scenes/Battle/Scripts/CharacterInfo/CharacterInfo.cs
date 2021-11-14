@@ -95,6 +95,8 @@ public class CharacterInfo : MonoBehaviour
         GameObject.Find("Character_Friendly").SendMessage("ReceiveCharactersMessage", FriendlyCharacters);
         GameObject.Find("Character_Enemy").SendMessage("ReceiveCharactersMessage", EnemyCharacters);
         GameObject.Find("Character_Info").SendMessage("ReceiveCharactersMessage", FriendlyCharacters);
+        yield return new WaitForSeconds(1);
+        UnityMainThreadDispatcher.Instance().Enqueue(() => EventCenter.Instance.TriggerEventListener("LoadPopInfo"));
         yield return null;
     }
 }
