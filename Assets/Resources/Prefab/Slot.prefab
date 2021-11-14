@@ -1866,6 +1866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Character: 
   CharacterIdx: 0
+  SkillPanel: {fileID: 6867659872182172999}
   BackGlow: {fileID: 9119366060548291970}
   BottomGlow: {fileID: 9119366061349665699}
   Frame: {fileID: 9119366060453236181}
@@ -1913,17 +1914,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6867659872182172999}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 9119366061923957628}
+        m_TargetAssemblyTypeName: CharacterSlotInfos, Assembly-CSharp
+        m_MethodName: ReverseSkillPanelVisible
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &9119366061954410186
 GameObject:

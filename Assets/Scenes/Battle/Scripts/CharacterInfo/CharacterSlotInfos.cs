@@ -9,6 +9,7 @@ public class CharacterSlotInfos : MonoBehaviour
 {
     [SerializeField] private string Character;
     [SerializeField] private int CharacterIdx;
+    [SerializeField] private GameObject SkillPanel;
     private int Level;
     [SerializeField] private GameObject BackGlow;
     [SerializeField] private GameObject BottomGlow;
@@ -71,9 +72,14 @@ public class CharacterSlotInfos : MonoBehaviour
             BottomGlow.GetComponent<Image>().color = Color.gray;
             Frame.GetComponent<Image>().color = Color.gray;
             gameObject.GetComponent<Button>().interactable = false;
+            gameObject.GetComponent<Button>().enabled = false;
         }
     }
 
+    public void ReverseSkillPanelVisible()
+    {
+        SkillPanel.SetActive(!SkillPanel.activeSelf);
+    }
 
 
 }
