@@ -53,6 +53,7 @@ public class LeaveMatch : MonoBehaviour
     {
         await User.battleSocket.SendMatchStateAsync(BattleDataManager.matchId, 103, "");
         popInfo.popupCancel.SetActive(false);
+        popInfo.popupConfirm.SetActive(false);
         popInfo.PopupMessage("Loose", "Keep on going!");
         popInfo.gameObject.SetActive(true);
         Invoke("Leave", 2);

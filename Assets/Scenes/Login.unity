@@ -272,7 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8d1e7e01c5e284aad368232c07d3b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneLoader: {fileID: 418746180}
   WarningMessage: {fileID: 1040394331}
   PopupWindow: {fileID: 855299386142171768}
 --- !u!1 &1000134889
