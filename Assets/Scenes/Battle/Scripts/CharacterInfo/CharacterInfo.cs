@@ -40,6 +40,7 @@ public class CharacterInfo : MonoBehaviour
         // Send infos to another client
         long opCode = 101; // 101 means send my player character info
         string json = JsonUtility.ToJson(cj);
+        await Task.Delay(TimeSpan.FromSeconds(3));
         await User.battleSocket.SendMatchStateAsync(BattleDataManager.matchId, opCode, json);
         /*
         var readObject = new[] {
