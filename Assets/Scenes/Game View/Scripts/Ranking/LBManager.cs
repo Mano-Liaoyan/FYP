@@ -5,31 +5,26 @@ using TMPro;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class LBManager : MonoBehaviour
-{
+public class LBManager : MonoBehaviour {
     GameObject ScrollRect;
     GameObject Content;
     List<GameObject> List_me;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         List_me = new List<GameObject>();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
     }
 
-    public async void getLeaderboard()
-    {
+    public async void getLeaderboard() {
         await getLeaderboardAsync();
     }
 
-    public async Task getLeaderboardAsync()
-    {
+    public async Task getLeaderboardAsync() {
         // 需要更改default选项
         // 还要加username
         const string leaderboardId = "score";
@@ -37,15 +32,13 @@ public class LBManager : MonoBehaviour
         ScrollRect = GameObject.Find("ScrollRect");
         Content = GameObject.Find("Content");
         print(Content);
-        foreach (Transform child in Content.transform)
-        {
+        foreach (Transform child in Content.transform) {
             List_me.Add(child.gameObject);
         }
 
         var my_rank = await User.client.ListLeaderboardRecordsAroundOwnerAsync(User.session, leaderboardId, User.session.UserId, null);
 
-        foreach (var r in my_rank.Records)
-        {
+        foreach (var r in my_rank.Records) {
             ScrollRect.transform.Find("List_Me/Text_999").GetComponent<TMP_Text>().text = r.Rank;
             ScrollRect.transform.Find("List_Me/Text_Score").GetComponent<TMP_Text>().text = r.Score;
             ScrollRect.transform.Find("List_Me/Text_NickName").GetComponent<TMP_Text>().text = r.Username;
@@ -53,11 +46,10 @@ public class LBManager : MonoBehaviour
         }
         int counter = 0;
 
-        var result = await User.client.ListLeaderboardRecordsAsync(User.session, leaderboardId,null,null,9);
+        var result = await User.client.ListLeaderboardRecordsAsync(User.session, leaderboardId, null, null, 9);
 
 
-        foreach (var r in result.Records)
-        {
+        foreach (var r in result.Records) {
 
             print(List_me[counter]);
             List_me[counter].transform.Find("Text_Score").GetComponent<TMP_Text>().text = r.Score;

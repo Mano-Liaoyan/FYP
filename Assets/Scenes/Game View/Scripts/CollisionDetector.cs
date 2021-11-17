@@ -25,6 +25,7 @@ public class CollisionDetector : MonoBehaviour
     // 碰撞过程中，每一帧都会调用一次
     private void OnTriggerStay(Collider collider)
     {
+        print(collider.gameObject.name);
         GainOrLosePoint.examineLocation(collider.gameObject.name);
     }
 
