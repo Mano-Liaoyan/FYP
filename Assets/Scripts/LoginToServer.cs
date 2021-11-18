@@ -8,7 +8,7 @@ using System;
 
 public class LoginToServer : MonoBehaviour {
     private const string Scheme = "http";
-    private const string Host = "81.71.41.8";
+    private const string Host = "xxx.xxx.xxx.xxx";
     private const int Port = 7350;
     private const string ServerKey = "defaultkey";
 
